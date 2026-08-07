@@ -1,6 +1,413 @@
+{% doc %}
+  @prompt
+    Create a mobile-only side navigation drawer block for a premium religious idol store called "The House Of Aradhna". The drawer slides in from the left when triggered by the existing hamburger menu (3 horizontal lines) in the header. Requirements: 1) A close (X) button at the top right of the drawer. 2) Store brand name "The House Of Aradhna" at the top with a decorative gold divider. 3) Navigation links from the store's main-menu: New Launches, Gold Coated Silver Idols, Idols with Photo Frames, Corporate Gifting, Customise Idol — each as a full-width tappable link. 4) A semi-transparent dark overlay/backdrop behind the drawer that closes it when tapped. 5) Smooth slide-in/slide-out CSS animation. 6) Warm premium styling: ivory or deep charcoal background, gold (#C9A84C) accents for borders and hover states, elegant serif or premium sans-serif font. 7) Only visible on mobile screens (hidden on desktop). 8) The drawer should hook into the existing header hamburger button click event to open.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-mobile-nav-drawer-{{ ai_gen_id }} {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: {{ block.settings.drawer_width }}%;
+    max-width: 360px;
+    height: 100vh;
+    background-color: {{ block.settings.drawer_bg_color }};
+    z-index: 9999;
+    transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
+    display: block;
+  }
+
+  .ai-mobile-nav-drawer-{{ ai_gen_id }}.active {
+    left: 0;
+  }
+
+  .ai-mobile-nav-drawer__overlay-{{ ai_gen_id }} {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, {{ block.settings.overlay_opacity }});
+    z-index: 9998;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+  }
+
+  .ai-mobile-nav-drawer__overlay-{{ ai_gen_id }}.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .ai-mobile-nav-drawer__header-{{ ai_gen_id }} {
+    padding: {{ block.settings.header_padding }}px;
+    border-bottom: 1px solid {{ block.settings.divider_color }};
+    position: relative;
+  }
+
+  .ai-mobile-nav-drawer__close-{{ ai_gen_id }} {
+    position: absolute;
+    top: {{ block.settings.header_padding }}px;
+    right: {{ block.settings.header_padding }}px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    color: {{ block.settings.text_color }};
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+  }
+
+  .ai-mobile-nav-drawer__close-{{ ai_gen_id }}:hover {
+    transform: rotate(90deg);
+  }
+
+  .ai-mobile-nav-drawer__close-{{ ai_gen_id }} svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .ai-mobile-nav-drawer__brand-{{ ai_gen_id }} {
+    font-family: {{ block.settings.brand_font.family }}, {{ block.settings.brand_font.fallback_families }};
+    font-weight: {{ block.settings.brand_font.weight }};
+    font-size: {{ block.settings.brand_size }}px;
+    color: {{ block.settings.brand_color }};
+    margin: 0 0 {{ block.settings.header_padding | divided_by: 2 }}px 0;
+    padding-right: 48px;
+    line-height: 1.3;
+  }
+
+  .ai-mobile-nav-drawer__divider-{{ ai_gen_id }} {
+    height: 2px;
+    background: {{ block.settings.accent_color }};
+    width: 60px;
+    margin: 0;
+  }
+
+  .ai-mobile-nav-drawer__nav-{{ ai_gen_id }} {
+    padding: {{ block.settings.nav_padding }}px 0;
+  }
+
+  .ai-mobile-nav-drawer__link-{{ ai_gen_id }} {
+    display: block;
+    padding: {{ block.settings.link_padding }}px {{ block.settings.header_padding }}px;
+    color: {{ block.settings.text_color }};
+    text-decoration: none;
+    font-family: {{ block.settings.link_font.family }}, {{ block.settings.link_font.fallback_families }};
+    font-weight: {{ block.settings.link_font.weight }};
+    font-size: {{ block.settings.link_size }}px;
+    border-bottom: 1px solid {{ block.settings.divider_color }};
+    transition: background-color 0.3s ease, padding-left 0.3s ease, border-left-color 0.3s ease;
+    border-left: 3px solid transparent;
+  }
+
+  .ai-mobile-nav-drawer__link-{{ ai_gen_id }}:hover,
+  .ai-mobile-nav-drawer__link-{{ ai_gen_id }}:active {
+    background-color: {{ block.settings.link_hover_bg }};
+    padding-left: {{ block.settings.header_padding | plus: 8 }}px;
+    border-left-color: {{ block.settings.accent_color }};
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-mobile-nav-drawer-{{ ai_gen_id }},
+    .ai-mobile-nav-drawer__overlay-{{ ai_gen_id }} {
+      display: none !important;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    body.ai-mobile-nav-open-{{ ai_gen_id }} {
+      overflow: hidden;
+    }
+  }
+{% endstyle %}
+
+<mobile-nav-drawer-{{ ai_gen_id }} {{ block.shopify_attributes }}>
+  <div class="ai-mobile-nav-drawer__overlay-{{ ai_gen_id }}" data-overlay></div>
+  
+  <nav class="ai-mobile-nav-drawer-{{ ai_gen_id }}" data-drawer aria-label="Mobile navigation">
+    <div class="ai-mobile-nav-drawer__header-{{ ai_gen_id }}">
+      <button 
+        class="ai-mobile-nav-drawer__close-{{ ai_gen_id }}" 
+        data-close
+        aria-label="Close navigation menu"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      
+      <h2 class="ai-mobile-nav-drawer__brand-{{ ai_gen_id }}">{{ block.settings.brand_name }}</h2>
+      <div class="ai-mobile-nav-drawer__divider-{{ ai_gen_id }}"></div>
+    </div>
+
+    <div class="ai-mobile-nav-drawer__nav-{{ ai_gen_id }}">
+      {% for link in linklists[block.settings.menu].links %}
+        <a 
+          href="{{ link.url }}" 
+          class="ai-mobile-nav-drawer__link-{{ ai_gen_id }}"
+        >
+          {{ link.title }}
+        </a>
+      {% endfor %}
+    </div>
+  </nav>
+</mobile-nav-drawer-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class MobileNavDrawer{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.drawer = this.querySelector('[data-drawer]');
+        this.overlay = this.querySelector('[data-overlay]');
+        this.closeButton = this.querySelector('[data-close]');
+        this.isOpen = false;
+      }
+
+      connectedCallback() {
+        this.setupEventListeners();
+        this.findAndBindHamburger();
+      }
+
+      findAndBindHamburger() {
+        const hamburgerSelectors = [
+          '.header__icon--menu',
+          '.header-menu-toggle',
+          '[aria-label*="menu" i]',
+          'button[aria-controls*="menu" i]',
+          '.mobile-menu-toggle',
+          '.menu-toggle',
+          'summary.header__icon',
+          '.js-mobile-nav-toggle'
+        ];
+
+        for (const selector of hamburgerSelectors) {
+          const hamburger = document.querySelector(selector);
+          if (hamburger) {
+            hamburger.addEventListener('click', (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              this.open();
+            });
+            break;
+          }
+        }
+
+        document.addEventListener('click', (e) => {
+          const target = e.target;
+          if (
+            target.closest('button[aria-label*="menu" i]') ||
+            target.closest('.header__icon--menu') ||
+            target.closest('.mobile-menu-toggle')
+          ) {
+            e.preventDefault();
+            e.stopPropagation();
+            this.open();
+          }
+        });
+      }
+
+      setupEventListeners() {
+        this.closeButton.addEventListener('click', () => this.close());
+        this.overlay.addEventListener('click', () => this.close());
+
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && this.isOpen) {
+            this.close();
+          }
+        });
+
+        this.drawer.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            setTimeout(() => this.close(), 200);
+          });
+        });
+      }
+
+      open() {
+        this.isOpen = true;
+        this.drawer.classList.add('active');
+        this.overlay.classList.add('active');
+        document.body.classList.add('ai-mobile-nav-open-{{ ai_gen_id }}');
+        this.closeButton.focus();
+      }
+
+      close() {
+        this.isOpen = false;
+        this.drawer.classList.remove('active');
+        this.overlay.classList.remove('active');
+        document.body.classList.remove('ai-mobile-nav-open-{{ ai_gen_id }}');
+      }
+    }
+
+    customElements.define('mobile-nav-drawer-{{ ai_gen_id }}', MobileNavDrawer{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Mobile navigation drawer",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Brand"
+    },
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand name",
+      "default": "The House Of Aradhna"
+    },
+    {
+      "type": "font_picker",
+      "id": "brand_font",
+      "label": "Brand font",
+      "default": "serif"
+    },
+    {
+      "type": "range",
+      "id": "brand_size",
+      "label": "Brand name size",
+      "min": 16,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "color",
+      "id": "brand_color",
+      "label": "Brand name color",
+      "default": "#2A1A15"
+    },
+    {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "font_picker",
+      "id": "link_font",
+      "label": "Link font",
+      "default": "sans-serif"
+    },
+    {
+      "type": "range",
+      "id": "link_size",
+      "label": "Link size",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "link_padding",
+      "label": "Link vertical padding",
+      "min": 12,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "drawer_bg_color",
+      "label": "Drawer background",
+      "default": "#FFFDF7"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#33261F"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color (gold)",
+      "default": "#C9A84C"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider color",
+      "default": "#E4D8C4"
+    },
+    {
+      "type": "color",
+      "id": "link_hover_bg",
+      "label": "Link hover background",
+      "default": "#FBF6EC"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.5
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "drawer_width",
+      "label": "Drawer width",
+      "min": 70,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 85
+    },
+    {
+      "type": "range",
+      "id": "header_padding",
+      "label": "Header padding",
+      "min": 16,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "nav_padding",
+      "label": "Navigation padding",
+      "min": 8,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    }
+  ],
+  "presets": [
+    {
+      "name": "Mobile navigation drawer"
+    }
+  ]
+}
 {% endschema %}
