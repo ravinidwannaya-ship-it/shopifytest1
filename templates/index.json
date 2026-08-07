@@ -16,9 +16,9 @@
           "type": "ai_gen_block_d623d62",
           "settings": {
             "logo": "shopify://shop_images/Picsart_26-08-07_19-22-36-971.png",
-            "logo_width": 80,
-            "max_width": 1000,
-            "desktop_padding_y": 10,
+            "logo_width": 130,
+            "max_width": 1250,
+            "desktop_padding_y": 26,
             "desktop_padding_x": 16,
             "show_wishlist": true,
             "header_bg_color": "#fbf6ec",
