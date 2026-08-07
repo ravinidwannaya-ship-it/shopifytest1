@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
     "color_bg": "#FBF6EC",
@@ -40,7 +49,8 @@
     "button_padding_x": 26,
     "button_transform": "uppercase",
     "button_letter_spacing": 1,
-    "logo_width": 160,
+    "logo": "shopify://shop_images/Picsart_26-08-07_08-43-35-482.png",
+    "logo_width": 190,
     "brand_name": "Kyathi Heritage",
     "footer_tagline": "Gold coated silver idols and framed deity reliefs, hand-finished in Puttur, Karnataka.",
     "card_image_ratio": "portrait",
@@ -72,6 +82,6 @@
     "notice_bg": "#2A1A15",
     "notice_text": "#FFF8EC",
     "notice_dismissible": true,
-    "sections": {}
+    "content_for_index": []
   }
 }
