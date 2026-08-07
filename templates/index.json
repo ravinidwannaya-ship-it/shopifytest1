@@ -491,6 +491,38 @@
     "1786103024b9fc9625": {
       "type": "_blocks",
       "settings": {}
+    },
+    "1786108873422dbffe": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_effb496_Xd3ct3": {
+          "type": "ai_gen_block_effb496",
+          "settings": {
+            "brand_name": "The House Of Aradhna",
+            "brand_font": "serif",
+            "brand_size": 22,
+            "brand_color": "#2A1A15",
+            "menu": "main-menu",
+            "link_font": "system_ui_n4",
+            "link_size": 16,
+            "link_padding": 16,
+            "drawer_bg_color": "#FFFDF7",
+            "text_color": "#33261F",
+            "accent_color": "#C9A84C",
+            "divider_color": "#E4D8C4",
+            "link_hover_bg": "#FBF6EC",
+            "overlay_opacity": 0.5,
+            "drawer_width": 85,
+            "header_padding": 24,
+            "nav_padding": 16
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_effb496_Xd3ct3"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -506,6 +538,7 @@
     "faq",
     "1786081984ac44974d",
     "17860987966541f0c1",
-    "1786103024b9fc9625"
+    "1786103024b9fc9625",
+    "1786108873422dbffe"
   ]
 }
