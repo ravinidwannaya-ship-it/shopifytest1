@@ -1,6 +1,412 @@
+{% doc %}
+  @prompt
+    Fix the mobile header layout for the Premium header section. The elements (hamburger menu, search icon, logo, account icon, wishlist/heart icon, cart/bag icon) are overlapping on mobile screens. Create a proper mobile header CSS fix that: 1. Uses flexbox with justify-content: space-between on the header row 2. Groups left icons (hamburger + search) on the left, logo strictly centered using absolute positioning or flex center, and right icons (account + wishlist + cart) on the right 3. Sets appropriate logo max-width for mobile (around 100-120px) 4. Sets icon sizes to about 20-22px on mobile 5. Adds proper left/right padding (12-16px) to the header container 6. Ensures minimum header height of 56-60px 7. Prevents any element from overflowing or overlapping another. This should apply only on mobile (max-width: 749px breakpoint).
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  /* Mobile Header Layout Fix */
+  @media screen and (max-width: 749px) {
+    .premium-header-{{ ai_gen_id }} {
+      width: 100%;
+      max-width: 100%;
+      min-height: 60px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      background-color: {{ block.settings.header_bg_color }};
+      border-bottom: 1px solid {{ block.settings.border_color }};
+    }
+
+    .premium-header-{{ ai_gen_id }}__row {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      min-height: 60px;
+    }
+
+    .premium-header-{{ ai_gen_id }}__left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+      z-index: 3;
+    }
+
+    .premium-header-{{ ai_gen_id }}__center {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      max-width: 120px;
+      flex-shrink: 1;
+    }
+
+    .premium-header-{{ ai_gen_id }}__logo {
+      display: block;
+      max-width: 120px;
+      width: auto;
+      height: auto;
+      max-height: 40px;
+    }
+
+    .premium-header-{{ ai_gen_id }}__logo img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-width: 120px;
+      max-height: 40px;
+      object-fit: contain;
+    }
+
+    .premium-header-{{ ai_gen_id }}__right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+      z-index: 3;
+    }
+
+    .premium-header-{{ ai_gen_id }}__icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      padding: 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: {{ block.settings.icon_color }};
+      flex-shrink: 0;
+    }
+
+    .premium-header-{{ ai_gen_id }}__icon svg {
+      width: 22px;
+      height: 22px;
+      display: block;
+    }
+
+    .premium-header-{{ ai_gen_id }}__icon--hamburger svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    /* Ensure no overflow */
+    .premium-header-{{ ai_gen_id }} * {
+      box-sizing: border-box;
+    }
+
+    /* Cart badge positioning */
+    .premium-header-{{ ai_gen_id }}__cart-badge {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background-color: {{ block.settings.badge_bg_color }};
+      color: {{ block.settings.badge_text_color }};
+      font-size: 10px;
+      font-weight: 600;
+      min-width: 16px;
+      height: 16px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 4px;
+    }
+
+    .premium-header-{{ ai_gen_id }}__icon--cart {
+      position: relative;
+    }
+  }
+
+  /* Desktop styles */
+  @media screen and (min-width: 750px) {
+    .premium-header-{{ ai_gen_id }} {
+      width: 100%;
+      max-width: {{ block.settings.max_width }}px;
+      margin: 0 auto;
+      padding: {{ block.settings.desktop_padding_y }}px {{ block.settings.desktop_padding_x }}px;
+      background-color: {{ block.settings.header_bg_color }};
+      border-bottom: 1px solid {{ block.settings.border_color }};
+    }
+
+    .premium-header-{{ ai_gen_id }}__row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .premium-header-{{ ai_gen_id }}__left {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .premium-header-{{ ai_gen_id }}__center {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    .premium-header-{{ ai_gen_id }}__logo {
+      max-width: {{ block.settings.logo_width }}px;
+    }
+
+    .premium-header-{{ ai_gen_id }}__logo img {
+      max-width: {{ block.settings.logo_width }}px;
+      height: auto;
+    }
+
+    .premium-header-{{ ai_gen_id }}__right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .premium-header-{{ ai_gen_id }}__icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      padding: 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: {{ block.settings.icon_color }};
+      transition: color 0.2s ease;
+    }
+
+    .premium-header-{{ ai_gen_id }}__icon:hover {
+      color: {{ block.settings.icon_hover_color }};
+    }
+
+    .premium-header-{{ ai_gen_id }}__icon svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .premium-header-{{ ai_gen_id }}__icon--hamburger {
+      display: none;
+    }
+
+    .premium-header-{{ ai_gen_id }}__cart-badge {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background-color: {{ block.settings.badge_bg_color }};
+      color: {{ block.settings.badge_text_color }};
+      font-size: 11px;
+      font-weight: 600;
+      min-width: 18px;
+      height: 18px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 5px;
+    }
+
+    .premium-header-{{ ai_gen_id }}__icon--cart {
+      position: relative;
+    }
+  }
+{% endstyle %}
+
+<header class="premium-header-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="premium-header-{{ ai_gen_id }}__row">
+    <div class="premium-header-{{ ai_gen_id }}__left">
+      <button
+        class="premium-header-{{ ai_gen_id }}__icon premium-header-{{ ai_gen_id }}__icon--hamburger"
+        aria-label="Open menu"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+      <button
+        class="premium-header-{{ ai_gen_id }}__icon premium-header-{{ ai_gen_id }}__icon--search"
+        aria-label="Search"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="premium-header-{{ ai_gen_id }}__center">
+      <a href="/" class="premium-header-{{ ai_gen_id }}__logo">
+        {% if block.settings.logo %}
+          <img
+            src="{{ block.settings.logo | image_url: width: 400 }}"
+            alt="{{ shop.name }}"
+            width="{{ block.settings.logo.width }}"
+            height="{{ block.settings.logo.height }}"
+            loading="eager"
+          >
+        {% else %}
+          <span style="font-size: 18px; font-weight: 600; color: {{ block.settings.icon_color }};">
+            {{ shop.name }}
+          </span>
+        {% endif %}
+      </a>
+    </div>
+
+    <div class="premium-header-{{ ai_gen_id }}__right">
+      <a
+        href="/account"
+        class="premium-header-{{ ai_gen_id }}__icon premium-header-{{ ai_gen_id }}__icon--account"
+        aria-label="Account"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+        </svg>
+      </a>
+      {% if block.settings.show_wishlist %}
+        <button
+          class="premium-header-{{ ai_gen_id }}__icon premium-header-{{ ai_gen_id }}__icon--wishlist"
+          aria-label="Wishlist"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+          </svg>
+        </button>
+      {% endif %}
+      <a
+        href="/cart"
+        class="premium-header-{{ ai_gen_id }}__icon premium-header-{{ ai_gen_id }}__icon--cart"
+        aria-label="Cart"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+        </svg>
+        {% if cart.item_count > 0 %}
+          <span class="premium-header-{{ ai_gen_id }}__cart-badge">{{ cart.item_count }}</span>
+        {% endif %}
+      </a>
+    </div>
+  </div>
+</header>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Premium header",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Desktop logo width",
+      "min": 80,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "default": 160
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Maximum width",
+      "min": 1000,
+      "max": 1800,
+      "step": 50,
+      "unit": "px",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_y",
+      "label": "Desktop vertical padding",
+      "min": 10,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_x",
+      "label": "Desktop horizontal padding",
+      "min": 16,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "header",
+      "content": "Features"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_wishlist",
+      "label": "Show wishlist icon",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "header_bg_color",
+      "label": "Background",
+      "default": "#FBF6EC"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon color",
+      "default": "#33261F"
+    },
+    {
+      "type": "color",
+      "id": "icon_hover_color",
+      "label": "Icon hover color",
+      "default": "#6B1F24"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#E4D8C4"
+    },
+    {
+      "type": "color",
+      "id": "badge_bg_color",
+      "label": "Cart badge background",
+      "default": "#6B1F24"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Cart badge text",
+      "default": "#FFF8EC"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Premium header"
+    }
+  ]
+}
 {% endschema %}
