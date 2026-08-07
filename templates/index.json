@@ -15,11 +15,11 @@
         "ai_gen_block_d623d62_qydNxW": {
           "type": "ai_gen_block_d623d62",
           "settings": {
-            "logo": "shopify://shop_images/Picsart_26-08-07_08-43-35-482.png",
-            "logo_width": 160,
-            "max_width": 1100,
-            "desktop_padding_y": 10,
-            "desktop_padding_x": 16,
+            "logo": "shopify://shop_images/Picsart_26-08-07_18-41-36-550.png",
+            "logo_width": 120,
+            "max_width": 1200,
+            "desktop_padding_y": 16,
+            "desktop_padding_x": 20,
             "show_wishlist": true,
             "header_bg_color": "#fbf6ec",
             "icon_color": "#33261f",
