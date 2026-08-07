@@ -1,0 +1,46 @@
+<div class="drawer__body">
+  {%- if cart.item_count == 0 -%}
+    <p class="muted">Your cart is empty.</p>
+    <a class="btn" href="{{ routes.all_products_collection_url }}">Continue shopping</a>
+  {%- else -%}
+    {%- if settings.cart_show_free_shipping_bar and settings.cart_free_shipping_threshold > 0 -%}
+      {%- assign thr = settings.cart_free_shipping_threshold | times: 100 -%}
+      {%- if cart.total_price >= thr -%}
+        <p class="muted" style="color:var(--success)">You have earned free shipping.</p>
+      {%- else -%}
+        <p class="muted">{{ thr | minus: cart.total_price | money }} away from free shipping</p>
+      {%- endif -%}
+      <div class="progress"><span style="width:{% if cart.total_price >= thr %}100{% else %}{{ cart.total_price | times: 100 | divided_by: thr }}{% endif %}%"></span></div>
+    {%- endif -%}
+    {%- for item in cart.items -%}
+      <div class="cart-item">
+        <a href="{{ item.url }}">{% if item.image %}<img src="{{ item.image | image_url: width: 180 }}" alt="{{ item.title | escape }}" width="88" height="110" loading="lazy">{% endif %}</a>
+        <div>
+          <a href="{{ item.url }}"><strong>{{ item.product.title }}</strong></a>
+          {%- unless item.variant.title contains 'Default' -%}<div class="muted" style="font-size:.85rem">{{ item.variant.title }}</div>{%- endunless -%}
+          <div class="price">{{ item.final_line_price | money }}</div>
+          <div class="qty" style="margin-top:8px">
+            <button type="button" data-qty="down" aria-label="Decrease quantity">&minus;</button>
+            <input type="number" min="0" value="{{ item.quantity }}" data-line-qty="{{ forloop.index }}" aria-label="Quantity">
+            <button type="button" data-qty="up" aria-label="Increase quantity">+</button>
+          </div>
+        </div>
+        <button type="button" class="drawer__close" data-line-remove="{{ forloop.index }}" aria-label="Remove {{ item.title | escape }}">&times;</button>
+      </div>
+    {%- endfor -%}
+    {%- if settings.cart_show_note -%}
+      <label class="field" style="margin-top:16px"><span>Order note</span>
+        <textarea name="note" form="CartDrawerForm" style="min-height:80px">{{ cart.note }}</textarea>
+      </label>
+    {%- endif -%}
+  {%- endif -%}
+</div>
+{%- if cart.item_count > 0 -%}
+  <form class="drawer__foot" id="CartDrawerForm" action="{{ routes.cart_url }}" method="post">
+    <div class="cart-row"><strong>Subtotal</strong><strong class="price">{{ cart.total_price | money }}</strong></div>
+    <div class="rte muted" style="font-size:.8rem">{{ settings.cart_footer_text }}</div>
+    <button type="submit" name="checkout" class="btn btn--full">Checkout</button>
+    <a class="btn btn--outline btn--full" style="margin-top:8px" href="{{ routes.cart_url }}">View cart</a>
+  </form>
+{%- endif -%}
+<span data-cart-count hidden>{{ cart.item_count }}</span>

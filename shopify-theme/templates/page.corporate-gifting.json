@@ -1,0 +1,32 @@
+{
+  "sections": {
+    "intro": { "type": "main-page", "settings": { "narrow": true } },
+    "trust": {
+      "type": "trust-bar",
+      "blocks": {
+        "t1": { "type": "item", "settings": { "heading": "Bulk pricing", "text": "Tiered rates from 25 pieces." } },
+        "t2": { "type": "item", "settings": { "heading": "Engraving", "text": "Names, dates or your logo." } },
+        "t3": { "type": "item", "settings": { "heading": "Dedicated manager", "text": "One point of contact end to end." } },
+        "t4": { "type": "item", "settings": { "heading": "Pan-India delivery", "text": "Insured, tracked, on schedule." } }
+      },
+      "block_order": ["t1", "t2", "t3", "t4"],
+      "settings": {}
+    },
+    "form": {
+      "type": "enquiry-form",
+      "blocks": {
+        "h1": { "type": "heading", "settings": { "label": "Your requirement" } },
+        "t1": { "type": "text", "settings": { "label": "Company", "required": true } },
+        "n1": { "type": "number", "settings": { "label": "Quantity", "placeholder": "50" } },
+        "d1": { "type": "dropdown", "settings": { "label": "Product interest", "options": "Photo frames, Gold coated idols, Both, Not sure yet" } },
+        "d2": { "type": "dropdown", "settings": { "label": "Budget per piece", "options": "Under Rs 5,000, Rs 5,000 - 15,000, Rs 15,000 - 40,000, Above Rs 40,000" } },
+        "d3": { "type": "dropdown", "settings": { "label": "Delivery timeline", "options": "Within 2 weeks, 3 to 4 weeks, 1 to 2 months, Flexible" } },
+        "c1": { "type": "checkbox", "settings": { "label": "Logo engraving required" } },
+        "ta": { "type": "textarea", "settings": { "label": "Additional details" } }
+      },
+      "block_order": ["h1", "t1", "n1", "d1", "d2", "d3", "c1", "ta"],
+      "settings": { "heading": "Corporate gifting enquiry", "eyebrow": "Corporate", "form_label": "Corporate gifting enquiry" }
+    }
+  },
+  "order": ["intro", "trust", "form"]
+}

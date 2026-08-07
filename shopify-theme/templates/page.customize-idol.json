@@ -1,0 +1,31 @@
+{
+  "sections": {
+    "intro": { "type": "main-page", "settings": { "narrow": true } },
+    "form": {
+      "type": "enquiry-form",
+      "blocks": {
+        "h1": { "type": "heading", "settings": { "label": "About the idol" } },
+        "d1": { "type": "dropdown", "settings": { "label": "Deity", "options": "Ganesha, Lakshmi, Balaji, Krishna, Durga, Saraswati, Sai Baba, Shiva, Hanuman, Other", "required": true } },
+        "d2": { "type": "dropdown", "settings": { "label": "Pose", "options": "Seated, Standing, Dancing, Blessing, Reclining, As per reference" } },
+        "d3": { "type": "dropdown", "settings": { "label": "Material", "options": "999 Silver gold coated, 925 Silver gold coated, Silver foil relief with frame" } },
+        "d4": { "type": "dropdown", "settings": { "label": "Finish", "options": "Dual tone, Full 24K gold coated, Antique silver, Mirror polish" } },
+        "d5": { "type": "dropdown", "settings": { "label": "Size", "options": "4 inch, 5 inch, 6 inch, 8 inch, 10 inch, 12 inch, Larger - specify below" } },
+        "d6": { "type": "dropdown", "settings": { "label": "Frame type", "options": "Not applicable, Carved teak, Solid rosewood, Carved sheesham, Brushed gold aluminium" } },
+        "d7": { "type": "dropdown", "settings": { "label": "Base", "options": "Integrated felt-lined, Wooden base, Marble base, No base" } },
+        "d8": { "type": "dropdown", "settings": { "label": "Engraving required", "options": "No, Yes - name, Yes - date, Yes - company logo" } },
+        "t1": { "type": "text", "settings": { "label": "Engraving text", "placeholder": "Exactly as it should appear" } },
+        "n1": { "type": "number", "settings": { "label": "Quantity", "placeholder": "1" } },
+        "d9": { "type": "dropdown", "settings": { "label": "Budget range", "options": "Under Rs 25,000, Rs 25,000 - 50,000, Rs 50,000 - 1,00,000, Above Rs 1,00,000" } },
+        "d10": { "type": "dropdown", "settings": { "label": "Needed by", "options": "Within 2 weeks, 3 to 4 weeks, 1 to 2 months, Flexible" } },
+        "d11": { "type": "dropdown", "settings": { "label": "Occasion", "options": "Gruhapravesham, Wedding, Deepavali, Birthday, Corporate gifting, Temple donation, Other" } },
+        "t2": { "type": "text", "settings": { "label": "Reference image link", "placeholder": "Google Drive or Instagram link" } },
+        "c1": { "type": "checkbox", "settings": { "label": "I would like gift packaging" } },
+        "c2": { "type": "checkbox", "settings": { "label": "Send me a wax-stage photo for approval" } },
+        "ta": { "type": "textarea", "settings": { "label": "Additional details", "placeholder": "Anything else we should know" } }
+      },
+      "block_order": ["h1", "d1", "d2", "d3", "d4", "d5", "d6", "d7", "d8", "t1", "n1", "d9", "d10", "d11", "t2", "c1", "c2", "ta"],
+      "settings": {}
+    }
+  },
+  "order": ["intro", "form"]
+}

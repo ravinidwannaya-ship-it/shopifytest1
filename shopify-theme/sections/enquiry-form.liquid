@@ -1,0 +1,105 @@
+<div class="section {% if section.settings.color_scheme == 'alt' %}section--alt{% endif %}" style="padding-top:{{ section.settings.padding_top }}px;padding-bottom:{{ section.settings.padding_bottom }}px">
+  <div class="container container--narrow">
+    {% render 'section-head' %}
+    <div class="card" style="padding:28px">
+      {% form 'contact', id: 'EnquiryForm' %}
+        {%- if form.posted_successfully? -%}
+          <p style="color:var(--success)"><strong>{{ section.settings.success_text }}</strong></p>
+        {%- endif -%}
+        {%- if form.errors -%}
+          <p style="color:var(--sale)">{{ form.errors | default_errors }}</p>
+        {%- endif -%}
+        <input type="hidden" name="contact[form_type]" value="{{ section.settings.form_label }}">
+        <div class="grid grid--2" style="--cols-mobile:1">
+          <label class="field"><span>Name *</span><input type="text" name="contact[name]" required></label>
+          <label class="field"><span>Email *</span><input type="email" name="contact[email]" required></label>
+          <label class="field"><span>Phone / WhatsApp</span><input type="tel" name="contact[phone]"></label>
+          <label class="field"><span>City</span><input type="text" name="contact[city]"></label>
+        </div>
+        {%- for block in section.blocks -%}
+          {%- assign fname = 'contact[' | append: block.settings.label | append: ']' -%}
+          {%- case block.type -%}
+            {%- when 'dropdown' -%}
+              <label class="field" {{ block.shopify_attributes }}><span>{{ block.settings.label }}{% if block.settings.required %} *{% endif %}</span>
+                <select name="{{ fname }}" {% if block.settings.required %}required{% endif %}>
+                  <option value="">Select</option>
+                  {%- assign opts = block.settings.options | split: ',' -%}
+                  {%- for o in opts -%}<option value="{{ o | strip | escape }}">{{ o | strip }}</option>{%- endfor -%}
+                </select>
+              </label>
+            {%- when 'text' -%}
+              <label class="field" {{ block.shopify_attributes }}><span>{{ block.settings.label }}{% if block.settings.required %} *{% endif %}</span>
+                <input type="text" name="{{ fname }}" placeholder="{{ block.settings.placeholder }}" {% if block.settings.required %}required{% endif %}>
+              </label>
+            {%- when 'number' -%}
+              <label class="field" {{ block.shopify_attributes }}><span>{{ block.settings.label }}</span>
+                <input type="number" name="{{ fname }}" placeholder="{{ block.settings.placeholder }}">
+              </label>
+            {%- when 'textarea' -%}
+              <label class="field" {{ block.shopify_attributes }}><span>{{ block.settings.label }}</span>
+                <textarea name="{{ fname }}" placeholder="{{ block.settings.placeholder }}"></textarea>
+              </label>
+            {%- when 'checkbox' -%}
+              <label class="field" style="display:flex;gap:10px;align-items:center" {{ block.shopify_attributes }}>
+                <input type="checkbox" name="{{ fname }}" value="Yes" style="width:auto;min-height:auto"> <span style="margin:0;text-transform:none;letter-spacing:0">{{ block.settings.label }}</span>
+              </label>
+            {%- when 'heading' -%}
+              <h3 style="margin-top:22px" {{ block.shopify_attributes }}>{{ block.settings.label }}</h3>
+          {%- endcase -%}
+        {%- endfor -%}
+        <button type="submit" class="btn btn--full" style="margin-top:12px">{{ section.settings.button_label }}</button>
+        {%- if section.settings.show_whatsapp and settings.whatsapp != blank -%}
+          <a class="btn btn--outline btn--full" style="margin-top:10px" target="_blank" rel="noopener" href="https://wa.me/{{ settings.whatsapp }}?text={{ 'Hello Kyathi Heritage, I have a custom idol enquiry.' | url_encode }}">Or send it on WhatsApp</a>
+        {%- endif -%}
+      {% endform %}
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Enquiry form",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Made to order" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Customised idol request" },
+    { "type": "richtext", "id": "subheading", "label": "Subheading", "default": "<p>Tell us the deity, size and finish. We reply within one working day.</p>" },
+    { "type": "text", "id": "form_label", "label": "Form label (shown in your inbox)", "default": "Custom idol request" },
+    { "type": "text", "id": "button_label", "label": "Submit button label", "default": "Send request" },
+    { "type": "text", "id": "success_text", "label": "Success message", "default": "Thank you. Our studio will contact you shortly." },
+    { "type": "checkbox", "id": "show_whatsapp", "label": "Show WhatsApp button", "default": true },
+    { "type": "select", "id": "color_scheme", "label": "Background", "default": "alt", "options": [
+      { "value": "default", "label": "Page background" }, { "value": "alt", "label": "Alternate" }
+    ]},
+    { "type": "range", "id": "padding_top", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Top padding", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Bottom padding", "default": 64 }
+  ],
+  "blocks": [
+    { "type": "heading", "name": "Group heading", "settings": [
+      { "type": "text", "id": "label", "label": "Heading", "default": "About the idol" }
+    ]},
+    { "type": "dropdown", "name": "Dropdown", "settings": [
+      { "type": "text", "id": "label", "label": "Question", "default": "Deity" },
+      { "type": "textarea", "id": "options", "label": "Options (comma separated)", "default": "Ganesha, Lakshmi, Balaji, Krishna, Durga, Saraswati, Sai Baba, Other" },
+      { "type": "checkbox", "id": "required", "label": "Required", "default": false }
+    ]},
+    { "type": "text", "name": "Text field", "settings": [
+      { "type": "text", "id": "label", "label": "Question", "default": "Reference link" },
+      { "type": "text", "id": "placeholder", "label": "Placeholder" },
+      { "type": "checkbox", "id": "required", "label": "Required", "default": false }
+    ]},
+    { "type": "number", "name": "Number field", "settings": [
+      { "type": "text", "id": "label", "label": "Question", "default": "Quantity" },
+      { "type": "text", "id": "placeholder", "label": "Placeholder" }
+    ]},
+    { "type": "textarea", "name": "Long answer", "settings": [
+      { "type": "text", "id": "label", "label": "Question", "default": "Additional details" },
+      { "type": "text", "id": "placeholder", "label": "Placeholder" }
+    ]},
+    { "type": "checkbox", "name": "Checkbox", "settings": [
+      { "type": "text", "id": "label", "label": "Label", "default": "I would like gift packaging" }
+    ]}
+  ],
+  "presets": [{ "name": "Enquiry form", "blocks": [
+    { "type": "heading" }, { "type": "dropdown" }, { "type": "dropdown" }, { "type": "textarea" }
+  ]}]
+}
+{% endschema %}

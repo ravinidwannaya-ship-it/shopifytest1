@@ -1,0 +1,40 @@
+<div class="section {% if section.settings.color_scheme == 'alt' %}section--alt{% elsif section.settings.color_scheme == 'primary' %}section--primary{% endif %} {% if section.settings.text_align == 'center' %}text-center{% endif %}" style="padding-top:{{ section.settings.padding_top }}px;padding-bottom:{{ section.settings.padding_bottom }}px">
+  <div class="container container--narrow reveal">
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when 'eyebrow' -%}<p class="eyebrow">{{ block.settings.text }}</p>
+        {%- when 'heading' -%}<h2 {{ block.shopify_attributes }}>{{ block.settings.text }}</h2>
+        {%- when 'text' -%}<div class="rte" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+        {%- when 'button' -%}<a class="btn {% if block.settings.style == 'outline' %}btn--outline{% elsif block.settings.style == 'accent' %}btn--accent{% endif %}" href="{{ block.settings.link }}" {{ block.shopify_attributes }}>{{ block.settings.label }}</a>
+      {%- endcase -%}
+    {%- endfor -%}
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Rich text",
+  "settings": [
+    { "type": "select", "id": "color_scheme", "label": "Background", "default": "default", "options": [
+      { "value": "default", "label": "Page background" }, { "value": "alt", "label": "Alternate" }, { "value": "primary", "label": "Primary" }
+    ]},
+    { "type": "select", "id": "text_align", "label": "Alignment", "default": "center", "options": [
+      { "value": "left", "label": "Left" }, { "value": "center", "label": "Centre" }
+    ]},
+    { "type": "range", "id": "padding_top", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Top padding", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Bottom padding", "default": 64 }
+  ],
+  "blocks": [
+    { "type": "eyebrow", "name": "Eyebrow", "settings": [{ "type": "text", "id": "text", "label": "Text", "default": "Since 1998" }] },
+    { "type": "heading", "name": "Heading", "settings": [{ "type": "text", "id": "text", "label": "Text", "default": "A house of devotional metalwork" }] },
+    { "type": "text", "name": "Text", "settings": [{ "type": "richtext", "id": "text", "label": "Text", "default": "<p>Tell your brand story here.</p>" }] },
+    { "type": "button", "name": "Button", "settings": [
+      { "type": "text", "id": "label", "label": "Label", "default": "Learn more" },
+      { "type": "url", "id": "link", "label": "Link" },
+      { "type": "select", "id": "style", "label": "Style", "default": "primary", "options": [
+        { "value": "primary", "label": "Primary" }, { "value": "outline", "label": "Outline" }, { "value": "accent", "label": "Accent" }
+      ]}
+    ]}
+  ],
+  "presets": [{ "name": "Rich text", "blocks": [{ "type": "heading" }, { "type": "text" }] }]
+}
+{% endschema %}

@@ -1,0 +1,25 @@
+{%- paginate search.results by 24 -%}
+<div class="section" style="padding-top:48px">
+  <div class="container">
+    <h1>Search</h1>
+    <form action="{{ routes.search_url }}" method="get" role="search" style="max-width:520px">
+      <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search idols, frames, deities" aria-label="Search">
+    </form>
+    {%- if search.performed -%}
+      <p class="muted" style="margin-top:14px">{{ search.results_count }} results for "{{ search.terms }}"</p>
+      <div class="grid grid--4" style="--cols-mobile:2;margin-top:20px">
+        {%- for item in search.results -%}
+          {%- if item.object_type == 'product' -%}{% render 'product-card', product: item %}
+          {%- else -%}<div class="card" style="padding:18px"><h3>{{ item.title }}</h3><p class="muted">{{ item.content | strip_html | truncate: 120 }}</p><a class="link-underline" href="{{ item.url }}">Read more</a></div>{%- endif -%}
+        {%- endfor -%}
+      </div>
+      {%- if paginate.pages > 1 -%}
+        <nav class="pagination">{% for part in paginate.parts %}{% if part.is_link %}<a href="{{ part.url }}">{{ part.title }}</a>{% else %}<span class="{% if part.title == paginate.current_page %}current{% endif %}">{{ part.title }}</span>{% endif %}{% endfor %}</nav>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</div>
+{%- endpaginate -%}
+{% schema %}
+{ "name": "Search results" }
+{% endschema %}

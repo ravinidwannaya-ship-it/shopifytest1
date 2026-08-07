@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "story": { "type": "image-with-text", "settings": { "heading": "A house of devotional metalwork", "eyebrow": "About Kyathi Heritage" } },
+    "main": { "type": "main-page", "settings": { "show_title": false, "narrow": true } },
+    "process": {
+      "type": "multicolumn",
+      "blocks": {
+        "m1": { "type": "column", "settings": { "number": "01", "heading": "Wax and mould" } },
+        "m2": { "type": "column", "settings": { "number": "02", "heading": "Cast in 999 silver" } },
+        "m3": { "type": "column", "settings": { "number": "03", "heading": "Chase and finish" } },
+        "m4": { "type": "column", "settings": { "number": "04", "heading": "24K gold coating" } }
+      },
+      "block_order": ["m1", "m2", "m3", "m4"],
+      "settings": {}
+    }
+  },
+  "order": ["story", "main", "process"]
+}

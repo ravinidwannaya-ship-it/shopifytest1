@@ -1,0 +1,1 @@
+GRANT UPDATE, DELETE ON public.back_in_stock_requests TO authenticated;

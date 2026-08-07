@@ -1,0 +1,24 @@
+<div data-predictive>
+  {%- if predictive_search.performed -%}
+    {%- if predictive_search.resources.products.size > 0 -%}
+      <ul style="list-style:none;padding:0;margin:0">
+        {%- for product in predictive_search.resources.products -%}
+          <li style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)">
+            <a href="{{ product.url }}" style="display:flex;gap:12px;align-items:center">
+              {% if product.featured_image %}<img src="{{ product.featured_image | image_url: width: 120 }}" alt="" width="56" height="70" style="object-fit:cover;border-radius:4px">{% endif %}
+              <span><strong>{{ product.title }}</strong><br><span class="price">{{ product.price | money }}</span></span>
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- else -%}
+      <p class="muted">No results found.</p>
+    {%- endif -%}
+    {%- for c in predictive_search.resources.collections -%}
+      <a class="link-underline" href="{{ c.url }}" style="display:block;padding:8px 0">{{ c.title }}</a>
+    {%- endfor -%}
+  {%- endif -%}
+</div>
+{% schema %}
+{ "name": "Predictive search" }
+{% endschema %}

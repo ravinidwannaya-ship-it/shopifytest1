@@ -1,0 +1,80 @@
+{
+  "sections": {
+    "slideshow": {
+      "type": "slideshow",
+      "blocks": {
+        "s1": { "type": "slide", "settings": { "eyebrow": "Gold Coated Silver Idols", "heading": "999 silver. 24 karat gold. One pair of hands.", "text": "Idols cast in pure silver, chased by hand, then coated in 24K gold and sealed against tarnish.", "button_label": "Shop gold coated idols", "align": "left" } },
+        "s2": { "type": "slide", "settings": { "eyebrow": "Idols with Photo Frames", "heading": "The deity, framed and ready for the wall", "text": "Gold-coated silver reliefs on maroon velvet, in carved teak and rosewood frames.", "button_label": "Shop photo frames", "align": "right" } },
+        "s3": { "type": "slide", "settings": { "eyebrow": "Made to order", "heading": "Your deity. Your size. Your finish.", "text": "Custom idols and framed reliefs, approved at the wax stage before we plate.", "button_label": "Start a custom order", "align": "left" } }
+      },
+      "block_order": ["s1", "s2", "s3"],
+      "settings": { "height": 620, "autoplay": true, "speed": 6 }
+    },
+    "trust": {
+      "type": "trust-bar",
+      "blocks": {
+        "t1": { "type": "item", "settings": { "heading": "999 silver, hallmarked", "text": "Purity certificate with every idol." } },
+        "t2": { "type": "item", "settings": { "heading": "24K gold coating", "text": "Electroplated and anti-tarnish sealed." } },
+        "t3": { "type": "item", "settings": { "heading": "Insured pan-India shipping", "text": "Double-boxed with foam moulding." } },
+        "t4": { "type": "item", "settings": { "heading": "Made in Puttur", "text": "Finished by hand in our own studio." } }
+      },
+      "block_order": ["t1", "t2", "t3", "t4"],
+      "settings": { "color_scheme": "alt" }
+    },
+    "collections": {
+      "type": "collection-list",
+      "blocks": {
+        "c1": { "type": "item", "settings": { "heading": "Gold Coated Silver Idols", "text": "999 silver, 24K gold coated, dual tone or full gold." } },
+        "c2": { "type": "item", "settings": { "heading": "Idols with Photo Frames", "text": "Deity reliefs on velvet in carved teak and rosewood." } },
+        "c3": { "type": "item", "settings": { "heading": "New Launches", "text": "Fresh from the plating bath, limited first runs." } }
+      },
+      "block_order": ["c1", "c2", "c3"],
+      "settings": { "columns": 3, "heading": "Two things, made properly" }
+    },
+    "featured": {
+      "type": "featured-collection",
+      "settings": { "eyebrow": "Best sellers", "heading": "Most gifted this season", "limit": 8, "columns": 4 }
+    },
+    "story": {
+      "type": "image-with-text",
+      "blocks": {
+        "p1": { "type": "point", "settings": { "heading": "Hallmarked purity", "text": "Certificate included with every piece." } },
+        "p2": { "type": "point", "settings": { "heading": "Hand-chased detail", "text": "Crown, jewellery and drape worked before plating." } }
+      },
+      "block_order": ["p1", "p2"],
+      "settings": { "heading": "Cast, chased and coated by hand", "eyebrow": "The studio", "image_position": "left" }
+    },
+    "process": {
+      "type": "multicolumn",
+      "blocks": {
+        "m1": { "type": "column", "settings": { "number": "01", "heading": "Wax and mould", "text": "<p>The form is sculpted in wax and approved before casting.</p>" } },
+        "m2": { "type": "column", "settings": { "number": "02", "heading": "Cast in 999 silver", "text": "<p>Poured, cooled and released, then cleaned by hand.</p>" } },
+        "m3": { "type": "column", "settings": { "number": "03", "heading": "Chase and finish", "text": "<p>Crown, jewellery and drape are chased with hand tools.</p>" } },
+        "m4": { "type": "column", "settings": { "number": "04", "heading": "24K gold coating", "text": "<p>Electroplated, sealed against tarnish, certified.</p>" } }
+      },
+      "block_order": ["m1", "m2", "m3", "m4"],
+      "settings": { "heading": "How a Kyathi idol is made", "columns": 4 }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "blocks": {
+        "q1": { "type": "quote", "settings": { "quote": "The gold work is genuinely hand laid. Six months on, the silver has not dulled at all.", "name": "Meera Raghavan", "detail": "Chennai - Siddhi Ganesha Idol" } },
+        "q2": { "type": "quote", "settings": { "quote": "The gold lotus base catches the lamp light beautifully. It has become the centre of their pooja room.", "name": "Kavitha Iyer", "detail": "Coimbatore - Gajalakshmi Idol" } },
+        "q3": { "type": "quote", "settings": { "quote": "Forty engraved frames in eleven days, not one damaged in transit.", "name": "Col. R. Sharma", "detail": "New Delhi - Corporate gifting" } }
+      },
+      "block_order": ["q1", "q2", "q3"],
+      "settings": {}
+    },
+    "faq": {
+      "type": "collapsible-content",
+      "blocks": {
+        "f1": { "type": "row", "settings": { "heading": "Is the gold coating permanent?", "text": "<p>Yes. The 24K coating is electroplated and then anti-tarnish sealed. Wipe with a dry cloth only.</p>" } },
+        "f2": { "type": "row", "settings": { "heading": "Do you make custom sizes?", "text": "<p>We do. Share the deity, size and finish and we will quote within a working day.</p>" } },
+        "f3": { "type": "row", "settings": { "heading": "How long does delivery take?", "text": "<p>In-stock pieces dispatch in 3 working days. Custom orders take 21 days.</p>" } }
+      },
+      "block_order": ["f1", "f2", "f3"],
+      "settings": {}
+    }
+  },
+  "order": ["slideshow", "trust", "collections", "featured", "story", "process", "testimonials", "faq"]
+}

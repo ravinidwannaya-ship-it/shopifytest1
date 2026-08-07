@@ -1,0 +1,29 @@
+{%- if section.blocks.size > 0 -%}
+<div class="announcement" style="background:{{ section.settings.bg }};color:{{ section.settings.text }}" data-slideshow data-autoplay="{{ section.settings.speed | times: 1000 }}">
+  <div class="slideshow__track" data-slides>
+    {%- for block in section.blocks -%}
+      <div class="slide announcement__slide" style="min-width:100%" {{ block.shopify_attributes }}>
+        {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}">{{ block.settings.text }}</a>{%- else -%}{{ block.settings.text }}{%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+{%- endif -%}
+{% schema %}
+{
+  "name": "Announcement bar",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "color", "id": "bg", "label": "Background", "default": "#6B1F24" },
+    { "type": "color", "id": "text", "label": "Text", "default": "#FFF8EC" },
+    { "type": "range", "id": "speed", "min": 3, "max": 12, "step": 1, "unit": "s", "label": "Rotate every", "default": 5 }
+  ],
+  "blocks": [
+    { "type": "announcement", "name": "Announcement", "settings": [
+      { "type": "text", "id": "text", "label": "Text", "default": "Free insured shipping across India on orders above Rs 5,000" },
+      { "type": "url", "id": "link", "label": "Link" }
+    ]}
+  ],
+  "presets": [{ "name": "Announcement bar", "blocks": [{ "type": "announcement" }] }]
+}
+{% endschema %}

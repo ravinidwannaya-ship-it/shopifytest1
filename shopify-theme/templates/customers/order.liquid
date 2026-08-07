@@ -1,0 +1,16 @@
+<div class="section"><div class="container">
+  <h1>Order {{ order.name }}</h1>
+  <p class="muted">{{ order.created_at | date: '%d %B %Y' }} - {{ order.financial_status_label }} - {{ order.fulfillment_status_label }}</p>
+  <table class="spec-table"><tbody>
+    {%- for line in order.line_items -%}
+      <tr><td>{{ line.title }} x {{ line.quantity }}</td><td>{{ line.final_line_price | money }}</td></tr>
+    {%- endfor -%}
+    <tr><td><strong>Subtotal</strong></td><td>{{ order.subtotal_price | money }}</td></tr>
+    <tr><td><strong>Shipping</strong></td><td>{{ order.shipping_price | money }}</td></tr>
+    <tr><td><strong>Total</strong></td><td><strong>{{ order.total_price | money }}</strong></td></tr>
+  </tbody></table>
+  <div class="grid grid--2" style="--cols-mobile:1;margin-top:20px">
+    <div><h3>Shipping address</h3>{{ order.shipping_address | format_address }}</div>
+    <div><h3>Billing address</h3>{{ order.billing_address | format_address }}</div>
+  </div>
+</div></div>

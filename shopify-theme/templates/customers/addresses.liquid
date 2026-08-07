@@ -1,0 +1,17 @@
+<div class="section"><div class="container container--narrow">
+  <h1>Addresses</h1>
+  <p><a class="link-underline" href="{{ routes.account_url }}">Back to account</a></p>
+  {% form 'customer_address', customer.new_address %}
+    {{ form.errors | default_errors }}
+    <label class="field"><span>Address</span><input type="text" name="address[address1]"></label>
+    <label class="field"><span>City</span><input type="text" name="address[city]"></label>
+    <label class="field"><span>Province</span><input type="text" name="address[province]"></label>
+    <label class="field"><span>PIN code</span><input type="text" name="address[zip]"></label>
+    <label class="field"><span>Country</span><input type="text" name="address[country]" value="India"></label>
+    <label class="field"><span>Phone</span><input type="tel" name="address[phone]"></label>
+    <button type="submit" class="btn">Add address</button>
+  {% endform %}
+  {%- for address in customer.addresses -%}
+    <div class="card" style="padding:16px;margin-top:14px">{{ address | format_address }}</div>
+  {%- endfor -%}
+</div></div>

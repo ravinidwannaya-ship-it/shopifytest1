@@ -1,0 +1,74 @@
+<header class="header {% if section.settings.sticky %}header--sticky{% endif %}">
+  <div class="header__inner">
+    <button class="header__burger" type="button" data-drawer-open="MenuDrawer" aria-label="Open menu">&#9776;</button>
+    <a class="header__logo" href="{{ routes.root_url }}" style="--logo-w: {{ settings.logo_width }}px">
+      {%- if settings.logo -%}
+        <img src="{{ settings.logo | image_url: width: 600 }}" alt="{{ settings.brand_name | escape }}" width="600" height="200">
+      {%- else -%}{{ settings.brand_name }}{%- endif -%}
+    </a>
+    <ul class="header__nav">
+      {%- for link in section.settings.menu.links -%}
+        <li>
+          <a href="{{ link.url }}" {% if link.active %}aria-current="page"{% endif %}>{{ link.title }}</a>
+          {%- if link.links.size > 0 -%}
+            <ul>{% for child in link.links %}<li><a href="{{ child.url }}">{{ child.title }}</a></li>{% endfor %}</ul>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+    <div class="header__actions">
+      {%- if section.settings.show_search -%}
+        <a href="{{ routes.search_url }}" data-drawer-open="SearchDrawer" aria-label="Search">&#9906;</a>
+      {%- endif -%}
+      {%- if section.settings.show_account and shop.customer_accounts_enabled -%}
+        <a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" aria-label="Account">&#9787;</a>
+      {%- endif -%}
+      <a href="{{ routes.cart_url }}" {% if settings.cart_type == 'drawer' %}data-drawer-open="CartDrawer"{% endif %} aria-label="Cart">
+        &#128722;<span class="cart-count" data-cart-count>{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<div class="drawer drawer--left" id="MenuDrawer" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="drawer__overlay" data-drawer-close></div>
+  <div class="drawer__panel">
+    <div class="drawer__head"><strong>Menu</strong><button class="drawer__close" type="button" data-drawer-close aria-label="Close menu">&times;</button></div>
+    <div class="drawer__body mobile-nav">
+      {%- for link in section.settings.menu.links -%}
+        {%- if link.links.size > 0 -%}
+          <details><summary>{{ link.title }}<span>+</span></summary>
+            <ul>{% for child in link.links %}<li><a href="{{ child.url }}">{{ child.title }}</a></li>{% endfor %}</ul>
+          </details>
+        {%- else -%}
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        {%- endif -%}
+      {%- endfor -%}
+      {%- if settings.phone != blank -%}<a href="tel:{{ settings.phone | remove: ' ' }}">Call {{ settings.phone }}</a>{%- endif -%}
+    </div>
+  </div>
+</div>
+
+<div class="drawer drawer--right" id="SearchDrawer" role="dialog" aria-modal="true" aria-label="Search">
+  <div class="drawer__overlay" data-drawer-close></div>
+  <div class="drawer__panel">
+    <div class="drawer__head"><strong>Search</strong><button class="drawer__close" type="button" data-drawer-close aria-label="Close search">&times;</button></div>
+    <div class="drawer__body">
+      <form action="{{ routes.search_url }}" method="get" role="search">
+        <input type="search" name="q" placeholder="Search idols, frames, deities" data-search-input aria-label="Search">
+      </form>
+      <div data-search-results style="margin-top:16px"></div>
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
+    { "type": "checkbox", "id": "sticky", "label": "Sticky header", "default": true },
+    { "type": "checkbox", "id": "show_search", "label": "Show search", "default": true },
+    { "type": "checkbox", "id": "show_account", "label": "Show account link", "default": true }
+  ]
+}
+{% endschema %}

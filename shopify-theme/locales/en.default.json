@@ -1,0 +1,17 @@
+{
+  "general": {
+    "search": { "title": "Search", "placeholder": "Search idols, frames, deities", "results": "Results" },
+    "cart": { "title": "Your cart", "empty": "Your cart is empty.", "checkout": "Checkout", "subtotal": "Subtotal" },
+    "accessibility": { "skip_to_content": "Skip to content", "close": "Close", "menu": "Menu" },
+    "404": { "title": "Page not found", "link": "Back to home" }
+  },
+  "products": {
+    "product": { "add_to_cart": "Add to cart", "sold_out": "Sold out", "unavailable": "Unavailable", "quantity": "Quantity", "on_sale": "Sale", "from": "From" }
+  },
+  "customer": {
+    "login": { "title": "Login", "email": "Email", "password": "Password", "submit": "Sign in" },
+    "register": { "title": "Create account", "submit": "Create account" },
+    "account": { "title": "My account", "logout": "Log out", "orders": "Order history" }
+  },
+  "onboarding": { "product_title": "Example product", "collection_title": "Example collection" }
+}

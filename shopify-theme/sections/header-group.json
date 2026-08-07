@@ -1,0 +1,17 @@
+{
+  "type": "header",
+  "name": "Header",
+  "sections": {
+    "announcement": {
+      "type": "announcement-bar",
+      "blocks": {
+        "a1": { "type": "announcement", "settings": { "text": "Free insured shipping across India on orders above Rs 5,000" } },
+        "a2": { "type": "announcement", "settings": { "text": "Custom idols made to order - approved at the wax stage" } }
+      },
+      "block_order": ["a1", "a2"],
+      "settings": {}
+    },
+    "header": { "type": "header", "settings": { "sticky": true, "show_search": true, "show_account": true } }
+  },
+  "order": ["announcement", "header"]
+}

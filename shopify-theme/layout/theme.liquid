@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}" class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="{{ settings.color_primary }}">
+    <link rel="canonical" href="{{ canonical_url }}">
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 96 }}">
+      <link rel="apple-touch-icon" href="{{ settings.favicon | image_url: width: 180 }}">
+    {%- elsif settings.logo != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.logo | image_url: width: 96 }}">
+    {%- endif -%}
+
+    <title>{{ page_title }}{% if current_tags %} &ndash; {{ current_tags | join: ', ' }}{% endif %}{% if current_page != 1 %} &ndash; Page {{ current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}</title>
+    {%- if page_description -%}<meta name="description" content="{{ page_description | escape }}">{%- endif -%}
+    {% render 'meta-tags' %}
+
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+    {%- assign gh = settings.google_font_heading | strip -%}
+    {%- assign gb = settings.google_font_body | strip -%}
+    {%- if gh != blank or gb != blank -%}
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      {%- assign w = settings.google_font_weights | default: '400;500;600;700' -%}
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2{% if gh != blank %}?family={{ gh | replace: ' ', '+' }}:wght@{{ w }}{% endif %}{% if gb != blank %}{% if gh != blank %}&{% else %}?{% endif %}family={{ gb | replace: ' ', '+' }}:wght@{{ w }}{% endif %}&display=swap">
+    {%- endif -%}
+
+    {{ content_for_header }}
+
+    {%- assign hf = settings.font_heading -%}
+    {%- assign bf = settings.font_body -%}
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+    <style>
+      {{ hf | font_face: font_display: 'swap' }}
+      {{ bf | font_face: font_display: 'swap' }}
+      :root{
+        --bg: {{ settings.color_bg }};
+        --bg-alt: {{ settings.color_bg_alt }};
+        --text: {{ settings.color_text }};
+        --heading: {{ settings.color_heading }};
+        --muted: {{ settings.color_muted }};
+        --primary: {{ settings.color_primary }};
+        --primary-text: {{ settings.color_primary_text }};
+        --accent: {{ settings.color_accent }};
+        --accent-gradient: {{ settings.gradient_accent }};
+        --terracotta: {{ settings.color_terracotta }};
+        --card: {{ settings.color_card }};
+        --border: {{ settings.color_border }};
+        --header-bg: {{ settings.color_header_bg }};
+        --header-text: {{ settings.color_header_text }};
+        --footer-bg: {{ settings.color_footer_bg }};
+        --footer-text: {{ settings.color_footer_text }};
+        --sale: {{ settings.color_sale }};
+        --success: {{ settings.color_success }};
+
+        --font-heading: {% if gh != blank %}"{{ gh }}", {% endif %}{{ hf.family }}, {{ hf.fallback_families }};
+        --font-body: {% if gb != blank %}"{{ gb }}", {% endif %}{{ bf.family }}, {{ bf.fallback_families }};
+        --font-heading-weight: {{ hf.weight }};
+        --font-body-weight: {{ bf.weight }};
+        --heading-scale: {{ settings.heading_scale | divided_by: 100.0 }};
+        --body-scale: {{ settings.body_scale | divided_by: 100.0 }};
+        --heading-transform: {{ settings.heading_transform }};
+        --heading-ls: {{ settings.heading_letter_spacing }}px;
+        --eyebrow-ls: {{ settings.eyebrow_letter_spacing }}px;
+
+        --page-width: {{ settings.page_width }}px;
+        --section-spacing: {{ settings.section_spacing }}px;
+        --grid-gap: {{ settings.grid_gap }}px;
+        --radius: {{ settings.corner_radius }}px;
+        --shadow: 0 {{ settings.card_shadow | divided_by: 2 }}px {{ settings.card_shadow }}px rgba(42,26,21,{% if settings.card_shadow == 0 %}0{% else %}0.10{% endif %});
+
+        --btn-radius: {{ settings.button_radius }}px;
+        --btn-py: {{ settings.button_padding_y }}px;
+        --btn-px: {{ settings.button_padding_x }}px;
+        --btn-transform: {{ settings.button_transform }};
+        --btn-ls: {{ settings.button_letter_spacing }}px;
+
+        --bottom-nav-h: 0px;
+        --sticky-bar-h: 0px;
+      }
+      {{ settings.custom_css }}
+    </style>
+    {{ settings.custom_head_html }}
+    <script>document.documentElement.className = document.documentElement.className.replace('no-js','js');</script>
+    <script src="{{ 'theme.js' | asset_url }}" defer></script>
+  </head>
+  <body class="template-{{ template.name | handle }} {% if settings.show_section_dividers %}has-dividers{% endif %} {% if settings.enable_animations %}animate-on{% endif %}">
+    <a class="skip-link" href="#MainContent">Skip to content</a>
+
+    {%- if settings.show_prototype_notice -%}
+      <div class="notice" id="proto-notice" role="status" style="--notice-bg:{{ settings.notice_bg }};--notice-text:{{ settings.notice_text }}">
+        <div class="notice__inner">{{ settings.prototype_notice_text }}</div>
+        {%- if settings.notice_dismissible -%}
+          <button type="button" class="notice__close" aria-label="Dismiss notice" data-dismiss-notice>&times;</button>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {% sections 'header-group' %}
+
+    <main id="MainContent" role="main" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
+
+    {% sections 'footer-group' %}
+
+    {% render 'cart-drawer' %}
+    {% render 'floating-buttons' %}
+    {% render 'mobile-bottom-nav' %}
+
+    <script>
+      window.theme = {
+        cartType: {{ settings.cart_type | json }},
+        routes: {
+          cart_add: "{{ routes.cart_add_url }}",
+          cart_change: "{{ routes.cart_change_url }}",
+          cart_update: "{{ routes.cart_update_url }}",
+          cart: "{{ routes.cart_url }}",
+          predictive_search: "{{ routes.predictive_search_url }}"
+        },
+        moneyFormat: {{ shop.money_format | json }},
+        freeShippingThreshold: {{ settings.cart_free_shipping_threshold | default: 0 }},
+        strings: { addToCart: "Add to cart", soldOut: "Sold out", unavailable: "Unavailable" }
+      };
+    </script>
+  </body>
+</html>

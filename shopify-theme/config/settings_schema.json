@@ -1,0 +1,175 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Kyathi Heritage",
+    "theme_version": "2.0.4",
+    "theme_author": "Kyathi",
+    "theme_documentation_url": "https://kyathi.lovable.app",
+    "theme_support_url": "https://kyathi.lovable.app"
+  },
+  {
+    "name": "Colours",
+    "settings": [
+      { "type": "header", "content": "Base" },
+      { "type": "color", "id": "color_bg", "label": "Page background", "default": "#FBF6EC" },
+      { "type": "color", "id": "color_bg_alt", "label": "Alternate section background", "default": "#F3E9D7" },
+      { "type": "color", "id": "color_text", "label": "Body text", "default": "#33261F" },
+      { "type": "color", "id": "color_heading", "label": "Headings", "default": "#2A1A15" },
+      { "type": "color", "id": "color_muted", "label": "Muted text", "default": "#7A6A5C" },
+      { "type": "header", "content": "Brand" },
+      { "type": "color", "id": "color_primary", "label": "Primary (maroon)", "default": "#6B1F24" },
+      { "type": "color", "id": "color_primary_text", "label": "Text on primary", "default": "#FFF8EC" },
+      { "type": "color", "id": "color_accent", "label": "Accent (brass / gold)", "default": "#C9A24B" },
+      { "type": "color", "id": "color_terracotta", "label": "Terracotta", "default": "#A8562F" },
+      { "type": "color_background", "id": "gradient_accent", "label": "Accent gradient", "default": "linear-gradient(135deg, #C9A24B 0%, #EBD6A0 50%, #A8863A 100%)" },
+      { "type": "header", "content": "Surfaces" },
+      { "type": "color", "id": "color_card", "label": "Card background", "default": "#FFFDF7" },
+      { "type": "color", "id": "color_border", "label": "Borders", "default": "#E4D8C4" },
+      { "type": "color", "id": "color_header_bg", "label": "Header background", "default": "#FBF6EC" },
+      { "type": "color", "id": "color_header_text", "label": "Header text", "default": "#33261F" },
+      { "type": "color", "id": "color_footer_bg", "label": "Footer background", "default": "#2A1A15" },
+      { "type": "color", "id": "color_footer_text", "label": "Footer text", "default": "#EFE3CE" },
+      { "type": "header", "content": "Status" },
+      { "type": "color", "id": "color_sale", "label": "Sale badge", "default": "#8A2B2B" },
+      { "type": "color", "id": "color_success", "label": "Success / in stock", "default": "#2F6B45" }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      { "type": "font_picker", "id": "font_heading", "label": "Heading font", "default": "assistant_n4" },
+      { "type": "font_picker", "id": "font_body", "label": "Body font", "default": "assistant_n4" },
+      { "type": "header", "content": "Google fonts (optional, overrides above)" },
+      { "type": "paragraph", "content": "Leave the family fields blank to use the Shopify fonts selected above." },
+      { "type": "text", "id": "google_font_heading", "label": "Heading Google font family", "default": "Cormorant Garamond" },
+      { "type": "text", "id": "google_font_body", "label": "Body Google font family", "default": "Karla" },
+      { "type": "text", "id": "google_font_weights", "label": "Weights to load", "default": "300;400;500;600;700", "info": "Semicolon separated." },
+      { "type": "header", "content": "Scale" },
+      { "type": "range", "id": "heading_scale", "min": 80, "max": 140, "step": 5, "unit": "%", "label": "Heading size", "default": 100 },
+      { "type": "range", "id": "body_scale", "min": 85, "max": 125, "step": 5, "unit": "%", "label": "Body size", "default": 100 },
+      { "type": "select", "id": "heading_transform", "label": "Heading letter case", "default": "none", "options": [
+        { "value": "none", "label": "Default" },
+        { "value": "uppercase", "label": "Uppercase" },
+        { "value": "capitalize", "label": "Capitalise" }
+      ]},
+      { "type": "range", "id": "heading_letter_spacing", "min": -2, "max": 8, "step": 1, "unit": "px", "label": "Heading letter spacing", "default": 0 },
+      { "type": "range", "id": "eyebrow_letter_spacing", "min": 0, "max": 10, "step": 1, "unit": "px", "label": "Eyebrow letter spacing", "default": 3 }
+    ]
+  },
+  {
+    "name": "Layout",
+    "settings": [
+      { "type": "range", "id": "page_width", "min": 1000, "max": 1800, "step": 20, "unit": "px", "label": "Maximum page width", "default": 1280 },
+      { "type": "range", "id": "section_spacing", "min": 20, "max": 120, "step": 4, "unit": "px", "label": "Default space between sections", "default": 64 },
+      { "type": "range", "id": "grid_gap", "min": 8, "max": 48, "step": 2, "unit": "px", "label": "Grid gap", "default": 24 },
+      { "type": "range", "id": "corner_radius", "min": 0, "max": 28, "step": 2, "unit": "px", "label": "Corner radius", "default": 4 },
+      { "type": "range", "id": "card_shadow", "min": 0, "max": 40, "step": 2, "unit": "px", "label": "Card shadow", "default": 10 },
+      { "type": "checkbox", "id": "show_section_dividers", "label": "Show hairline dividers between sections", "default": false },
+      { "type": "checkbox", "id": "enable_animations", "label": "Animate sections on scroll", "default": true }
+    ]
+  },
+  {
+    "name": "Buttons",
+    "settings": [
+      { "type": "range", "id": "button_radius", "min": 0, "max": 40, "step": 2, "unit": "px", "label": "Button corner radius", "default": 2 },
+      { "type": "range", "id": "button_padding_y", "min": 8, "max": 24, "step": 1, "unit": "px", "label": "Button vertical padding", "default": 14 },
+      { "type": "range", "id": "button_padding_x", "min": 12, "max": 48, "step": 2, "unit": "px", "label": "Button horizontal padding", "default": 26 },
+      { "type": "select", "id": "button_transform", "label": "Button letter case", "default": "uppercase", "options": [
+        { "value": "none", "label": "Default" },
+        { "value": "uppercase", "label": "Uppercase" }
+      ]},
+      { "type": "range", "id": "button_letter_spacing", "min": 0, "max": 6, "step": 1, "unit": "px", "label": "Button letter spacing", "default": 1 }
+    ]
+  },
+  {
+    "name": "Brand",
+    "settings": [
+      { "type": "image_picker", "id": "logo", "label": "Logo" },
+      { "type": "image_picker", "id": "logo_light", "label": "Logo for dark backgrounds (footer)" },
+      { "type": "range", "id": "logo_width", "min": 70, "max": 360, "step": 5, "unit": "px", "label": "Logo width", "default": 160 },
+      { "type": "image_picker", "id": "favicon", "label": "Favicon" },
+      { "type": "text", "id": "brand_name", "label": "Brand name", "default": "Kyathi Heritage" },
+      { "type": "textarea", "id": "footer_tagline", "label": "Brand tagline", "default": "Gold coated silver idols and framed deity reliefs, hand-finished in Puttur, Karnataka." },
+      { "type": "image_picker", "id": "social_share_image", "label": "Default social sharing image" }
+    ]
+  },
+  {
+    "name": "Product cards",
+    "settings": [
+      { "type": "select", "id": "card_image_ratio", "label": "Image ratio", "default": "portrait", "options": [
+        { "value": "adapt", "label": "Adapt to image" },
+        { "value": "square", "label": "Square" },
+        { "value": "portrait", "label": "Portrait (4:5)" },
+        { "value": "tall", "label": "Tall (2:3)" }
+      ]},
+      { "type": "checkbox", "id": "card_show_secondary_image", "label": "Show second image on hover", "default": true },
+      { "type": "checkbox", "id": "card_show_vendor", "label": "Show vendor", "default": false },
+      { "type": "checkbox", "id": "card_show_rating", "label": "Show rating (metafield reviews)", "default": true },
+      { "type": "checkbox", "id": "card_show_quick_add", "label": "Show quick add button", "default": true },
+      { "type": "checkbox", "id": "card_show_sale_badge", "label": "Show sale badge", "default": true },
+      { "type": "checkbox", "id": "card_show_sold_out_badge", "label": "Show sold out badge", "default": true },
+      { "type": "text", "id": "badge_new_tag", "label": "Tag that shows a \"New\" badge", "default": "new" },
+      { "type": "select", "id": "card_text_align", "label": "Text alignment", "default": "left", "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Centre" }
+      ]}
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      { "type": "select", "id": "cart_type", "label": "Cart behaviour", "default": "drawer", "options": [
+        { "value": "drawer", "label": "Slide-out drawer" },
+        { "value": "page", "label": "Go to cart page" }
+      ]},
+      { "type": "checkbox", "id": "cart_show_note", "label": "Enable order notes", "default": true },
+      { "type": "checkbox", "id": "cart_show_free_shipping_bar", "label": "Show free shipping progress bar", "default": true },
+      { "type": "number", "id": "cart_free_shipping_threshold", "label": "Free shipping threshold (in currency, no decimals)", "default": 5000 },
+      { "type": "richtext", "id": "cart_footer_text", "label": "Text below the checkout button", "default": "<p>Taxes and shipping calculated at checkout.</p>" }
+    ]
+  },
+  {
+    "name": "Contact & social",
+    "settings": [
+      { "type": "text", "id": "phone", "label": "Phone", "default": "+91 95915 17282" },
+      { "type": "text", "id": "whatsapp", "label": "WhatsApp number (digits only)", "default": "919591517282" },
+      { "type": "text", "id": "email", "label": "Email", "default": "hello@kyathi.in" },
+      { "type": "textarea", "id": "address", "label": "Address", "default": "Radhakrishna Building, Near Rotary Blood Bank, Puttur - 574201" },
+      { "type": "text", "id": "hours", "label": "Opening hours", "default": "Mon-Sun - 10:00 AM to 8:30 PM" },
+      { "type": "url", "id": "map_url", "label": "Google Maps link" },
+      { "type": "header", "content": "Social" },
+      { "type": "url", "id": "social_instagram", "label": "Instagram" },
+      { "type": "url", "id": "social_facebook", "label": "Facebook" },
+      { "type": "url", "id": "social_youtube", "label": "YouTube" },
+      { "type": "url", "id": "social_pinterest", "label": "Pinterest" },
+      { "type": "url", "id": "social_x", "label": "X / Twitter" }
+    ]
+  },
+  {
+    "name": "Floating buttons",
+    "settings": [
+      { "type": "checkbox", "id": "show_whatsapp_fab", "label": "Show floating WhatsApp button", "default": true },
+      { "type": "text", "id": "whatsapp_message", "label": "Pre-filled WhatsApp message", "default": "Hello Kyathi Heritage, I would like to know more about your idols." },
+      { "type": "checkbox", "id": "show_call_fab", "label": "Show floating call button on mobile", "default": true },
+      { "type": "checkbox", "id": "show_mobile_bottom_nav", "label": "Show mobile bottom navigation", "default": true },
+      { "type": "checkbox", "id": "show_back_to_top", "label": "Show back to top button", "default": true }
+    ]
+  },
+  {
+    "name": "Notice bar",
+    "settings": [
+      { "type": "checkbox", "id": "show_prototype_notice", "label": "Show caution / notice bar", "default": false },
+      { "type": "richtext", "id": "prototype_notice_text", "label": "Notice text", "default": "<p>Caution! This is a prototype website. Please do not make any payments.</p>" },
+      { "type": "color", "id": "notice_bg", "label": "Notice background", "default": "#2A1A15" },
+      { "type": "color", "id": "notice_text", "label": "Notice text colour", "default": "#FFF8EC" },
+      { "type": "checkbox", "id": "notice_dismissible", "label": "Allow visitors to dismiss it", "default": true }
+    ]
+  },
+  {
+    "name": "Custom code",
+    "settings": [
+      { "type": "textarea", "id": "custom_css", "label": "Custom CSS" },
+      { "type": "textarea", "id": "custom_head_html", "label": "Custom HTML for <head>", "info": "Verification tags, pixels, etc." }
+    ]
+  }
+]

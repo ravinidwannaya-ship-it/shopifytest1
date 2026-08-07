@@ -1,0 +1,17 @@
+<div class="section"><div class="container container--narrow">
+  <h1>Login</h1>
+  {% form 'customer_login' %}
+    {{ form.errors | default_errors }}
+    <label class="field"><span>Email</span><input type="email" name="customer[email]" required></label>
+    <label class="field"><span>Password</span><input type="password" name="customer[password]"></label>
+    <button type="submit" class="btn btn--full">Sign in</button>
+  {% endform %}
+  <p style="margin-top:14px"><a class="link-underline" href="{{ routes.account_register_url }}">Create an account</a></p>
+  {% form 'recover_customer_password' %}
+    {{ form.errors | default_errors }}
+    <details class="accordion"><summary>Forgot password</summary><div class="accordion__body">
+      <label class="field"><span>Email</span><input type="email" name="email" required></label>
+      <button type="submit" class="btn btn--outline">Send reset link</button>
+    </div></details>
+  {% endform %}
+</div></div>

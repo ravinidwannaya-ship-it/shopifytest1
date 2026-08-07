@@ -1,0 +1,20 @@
+{%- paginate blog.articles by 12 -%}
+<div class="section" style="padding-top:56px;padding-bottom:64px">
+  <div class="container">
+    <h1>{{ blog.title }}</h1>
+    <div class="grid grid--3" style="--cols-mobile:1;margin-top:24px">
+      {%- for article in blog.articles -%}
+        <a href="{{ article.url }}" class="reveal">
+          <div class="media ratio-landscape">{% if article.image %}<img src="{{ article.image | image_url: width: 800 }}" alt="{{ article.title | escape }}" width="800" height="450" loading="lazy">{% endif %}</div>
+          <h3 style="margin-top:12px">{{ article.title }}</h3>
+          <p class="muted">{{ article.excerpt_or_content | strip_html | truncate: 130 }}</p>
+        </a>
+      {%- endfor -%}
+    </div>
+    {%- if paginate.pages > 1 -%}<nav class="pagination">{% for part in paginate.parts %}{% if part.is_link %}<a href="{{ part.url }}">{{ part.title }}</a>{% else %}<span class="{% if part.title == paginate.current_page %}current{% endif %}">{{ part.title }}</span>{% endif %}{% endfor %}</nav>{%- endif -%}
+  </div>
+</div>
+{%- endpaginate -%}
+{% schema %}
+{ "name": "Blog posts" }
+{% endschema %}

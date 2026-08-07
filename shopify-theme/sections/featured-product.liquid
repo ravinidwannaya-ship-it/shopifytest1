@@ -1,0 +1,36 @@
+{%- assign p = section.settings.product -%}
+<div class="section {% if section.settings.color_scheme == 'alt' %}section--alt{% endif %}" style="padding-top:{{ section.settings.padding_top }}px;padding-bottom:{{ section.settings.padding_bottom }}px">
+  <div class="container">
+    <div class="iwt reveal">
+      <div class="media ratio-portrait">
+        {%- if p.featured_image -%}<img src="{{ p.featured_image | image_url: width: 1000 }}" alt="{{ p.title | escape }}" width="1000" height="1250" loading="lazy">{%- else -%}{{ 'product-1' | placeholder_svg_tag }}{%- endif -%}
+      </div>
+      <div>
+        {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+        <h2>{{ p.title | default: 'Featured product' }}</h2>
+        <p class="price price--lg">{{ p.price | money }}{% if p.compare_at_price > p.price %}<s>{{ p.compare_at_price | money }}</s>{% endif %}</p>
+        <div class="rte muted">{{ p.description | strip_html | truncate: 240 }}</div>
+        {%- if p != blank -%}
+          <a class="btn" href="{{ p.url }}">{{ section.settings.button_label }}</a>
+          {%- if p.available -%}<button type="button" class="btn btn--outline" style="margin-left:8px" data-quick-add="{{ p.selected_or_first_available_variant.id }}">Add to cart</button>{%- endif -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Featured product",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Product" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Piece of the month" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "View details" },
+    { "type": "select", "id": "color_scheme", "label": "Background", "default": "alt", "options": [
+      { "value": "default", "label": "Page background" }, { "value": "alt", "label": "Alternate" }
+    ]},
+    { "type": "range", "id": "padding_top", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Top padding", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Bottom padding", "default": 64 }
+  ],
+  "presets": [{ "name": "Featured product" }]
+}
+{% endschema %}

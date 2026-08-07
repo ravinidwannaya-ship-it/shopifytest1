@@ -1,0 +1,19 @@
+{
+  "type": "footer",
+  "name": "Footer",
+  "sections": {
+    "newsletter": { "type": "newsletter", "settings": { "color_scheme": "primary" } },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "brand": { "type": "brand", "settings": {} },
+        "menu": { "type": "menu", "settings": { "heading": "Shop" } },
+        "contact": { "type": "contact", "settings": { "heading": "Visit the studio" } },
+        "text": { "type": "text", "settings": { "heading": "About", "text": "<p>Gold coated silver idols and framed deity reliefs, hand-finished in Puttur, Karnataka.</p>" } }
+      },
+      "block_order": ["brand", "menu", "contact", "text"],
+      "settings": { "show_payment_icons": true }
+    }
+  },
+  "order": ["newsletter", "footer"]
+}

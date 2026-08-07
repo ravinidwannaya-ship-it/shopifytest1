@@ -1,0 +1,6 @@
+{%- capture section_classes -%}
+section {% if section.settings.color_scheme == 'alt' %}section--alt{% elsif section.settings.color_scheme == 'primary' %}section--primary{% endif %} {% if section.settings.text_align == 'center' %}text-center{% endif %}
+{%- endcapture -%}
+{%- capture section_style -%}
+padding-top:{{ section.settings.padding_top | default: 64 }}px;padding-bottom:{{ section.settings.padding_bottom | default: 64 }}px;
+{%- endcapture -%}

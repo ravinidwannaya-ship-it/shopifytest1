@@ -1,0 +1,45 @@
+<div class="section" style="padding-top:{{ section.settings.padding_top }}px;padding-bottom:{{ section.settings.padding_bottom }}px">
+  <div class="container">
+    {% render 'section-head' %}
+    <div class="grid grid--2" style="--cols-mobile:1">
+      <div class="card" style="padding:26px">
+        {% form 'contact' %}
+          {%- if form.posted_successfully? -%}<p style="color:var(--success)">Thank you, we will be in touch.</p>{%- endif -%}
+          {%- if form.errors -%}<p style="color:var(--sale)">{{ form.errors | default_errors }}</p>{%- endif -%}
+          <label class="field"><span>Name</span><input type="text" name="contact[name]" required></label>
+          <label class="field"><span>Email</span><input type="email" name="contact[email]" required></label>
+          <label class="field"><span>Phone</span><input type="tel" name="contact[phone]"></label>
+          <label class="field"><span>Message</span><textarea name="contact[body]" required></textarea></label>
+          <button type="submit" class="btn btn--full">{{ section.settings.button_label }}</button>
+        {% endform %}
+      </div>
+      <div>
+        <h3>{{ section.settings.info_heading }}</h3>
+        <p class="rte">{{ settings.address }}</p>
+        <p>{{ settings.hours }}</p>
+        {%- if settings.phone != blank -%}<p><a class="btn btn--accent" href="tel:{{ settings.phone | remove: ' ' }}">Call {{ settings.phone }}</a></p>{%- endif -%}
+        {%- if settings.whatsapp != blank -%}<p><a class="btn btn--outline" target="_blank" rel="noopener" href="https://wa.me/{{ settings.whatsapp }}">WhatsApp us</a></p>{%- endif -%}
+        {%- if settings.email != blank -%}<p><a href="mailto:{{ settings.email }}">{{ settings.email }}</a></p>{%- endif -%}
+        {%- if section.settings.map_embed != blank -%}
+          <div class="media ratio-landscape" style="margin-top:16px">{{ section.settings.map_embed }}</div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Contact form",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Contact" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Talk to the studio" },
+    { "type": "richtext", "id": "subheading", "label": "Subheading" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Send message" },
+    { "type": "text", "id": "info_heading", "label": "Info heading", "default": "Kyathi Heritage - Flagship Studio" },
+    { "type": "html", "id": "map_embed", "label": "Google Maps embed code" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Top padding", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Bottom padding", "default": 64 }
+  ],
+  "presets": [{ "name": "Contact form" }]
+}
+{% endschema %}

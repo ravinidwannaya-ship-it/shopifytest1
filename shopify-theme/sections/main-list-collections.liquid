@@ -1,0 +1,17 @@
+<div class="section" style="padding-top:56px;padding-bottom:64px">
+  <div class="container">
+    <h1>Collections</h1>
+    <div class="grid grid--3" style="--cols-mobile:1;margin-top:24px">
+      {%- for c in collections -%}
+        <a href="{{ c.url }}" class="reveal">
+          <div class="media ratio-portrait">{% if c.featured_image %}<img src="{{ c.featured_image | image_url: width: 800 }}" alt="{{ c.title | escape }}" width="800" height="1000" loading="lazy">{% else %}{{ 'collection-1' | placeholder_svg_tag }}{% endif %}</div>
+          <h3 style="margin-top:12px">{{ c.title }}</h3>
+          <span class="muted">{{ c.products_count }} products</span>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+{% schema %}
+{ "name": "Collections list" }
+{% endschema %}

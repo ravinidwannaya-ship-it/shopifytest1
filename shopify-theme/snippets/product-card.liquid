@@ -1,0 +1,50 @@
+{%- liquid
+  assign ratio = settings.card_image_ratio
+  assign ratio_class = 'ratio-portrait'
+  if ratio == 'square'
+    assign ratio_class = 'ratio-square'
+  elsif ratio == 'tall'
+    assign ratio_class = 'ratio-tall'
+  elsif ratio == 'adapt'
+    assign ratio_class = ''
+  endif
+-%}
+<div class="pcard reveal" style="--card-align:{{ settings.card_text_align }}">
+  <a class="pcard__media {{ ratio_class }}" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
+    <div class="pcard__badges">
+      {%- if settings.card_show_sold_out_badge and product.available == false -%}<span class="badge badge--soldout">Sold out</span>{%- endif -%}
+      {%- if settings.card_show_sale_badge and product.compare_at_price > product.price and product.available -%}
+        <span class="badge badge--sale">Save {{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price }}%</span>
+      {%- endif -%}
+      {%- if settings.badge_new_tag != blank and product.tags contains settings.badge_new_tag -%}<span class="badge">New</span>{%- endif -%}
+    </div>
+    {%- if product.featured_image -%}
+      <img class="primary" src="{{ product.featured_image | image_url: width: 700 }}" alt="{{ product.featured_image.alt | default: product.title | escape }}" width="700" height="875" loading="lazy">
+      {%- if settings.card_show_secondary_image and product.images.size > 1 -%}
+        <img class="secondary" src="{{ product.images[1] | image_url: width: 700 }}" alt="" loading="lazy" aria-hidden="true">
+      {%- endif -%}
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag }}
+    {%- endif -%}
+  </a>
+  <div class="pcard__body">
+    {%- if settings.card_show_vendor and product.vendor != blank -%}<p class="eyebrow">{{ product.vendor }}</p>{%- endif -%}
+    <h3 class="pcard__title"><a href="{{ product.url }}">{{ product.title }}</a></h3>
+    {%- if settings.card_show_rating and product.metafields.reviews.rating.value != blank -%}
+      <div class="stars" aria-label="Rated {{ product.metafields.reviews.rating.value.rating }} out of 5">
+        {% assign r = product.metafields.reviews.rating.value.rating | round %}
+        {% for i in (1..5) %}{% if i <= r %}&#9733;{% else %}&#9734;{% endif %}{% endfor %}
+        <span class="muted" style="font-size:.78rem">({{ product.metafields.reviews.rating_count }})</span>
+      </div>
+    {%- endif -%}
+    <p class="price">
+      {%- if product.price_varies -%}From {% endif -%}{{ product.price | money }}
+      {%- if product.compare_at_price > product.price %}<s>{{ product.compare_at_price | money }}</s>{% endif -%}
+    </p>
+    {%- if settings.card_show_quick_add and product.available -%}
+      <button type="button" class="btn btn--outline quick-add" data-quick-add="{{ product.selected_or_first_available_variant.id }}">
+        {% if product.variants.size > 1 %}Choose options{% else %}Add to cart{% endif %}
+      </button>
+    {%- endif -%}
+  </div>
+</div>

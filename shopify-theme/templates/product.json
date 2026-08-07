@@ -1,0 +1,29 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": { "type": "vendor", "settings": {} },
+        "title": { "type": "title", "settings": {} },
+        "rating": { "type": "rating", "settings": {} },
+        "price": { "type": "price", "settings": {} },
+        "inventory": { "type": "inventory", "settings": {} },
+        "short": { "type": "short_description", "settings": {} },
+        "variants": { "type": "variant_picker", "settings": { "style": "buttons" } },
+        "qty": { "type": "quantity", "settings": {} },
+        "buy": { "type": "buy_buttons", "settings": {} },
+        "whatsapp": { "type": "whatsapp", "settings": {} },
+        "trust": { "type": "trust_icons", "settings": {} },
+        "desc": { "type": "description", "settings": {} },
+        "specs": { "type": "specs", "settings": {} },
+        "shipping": { "type": "accordion", "settings": { "heading": "Shipping & returns" } },
+        "care": { "type": "accordion", "settings": { "heading": "Care", "text": "<p>Dry cloth only. Never use metal polish or acid cleaners.</p>" } },
+        "share": { "type": "share", "settings": {} }
+      },
+      "block_order": ["vendor", "title", "rating", "price", "inventory", "short", "variants", "qty", "buy", "whatsapp", "trust", "desc", "specs", "shipping", "care", "share"],
+      "settings": {}
+    },
+    "related": { "type": "related-products", "settings": {} }
+  },
+  "order": ["main", "related"]
+}

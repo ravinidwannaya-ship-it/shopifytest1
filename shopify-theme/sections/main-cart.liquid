@@ -1,0 +1,62 @@
+<div class="section" style="padding-top:{{ section.settings.padding_top }}px;padding-bottom:{{ section.settings.padding_bottom }}px">
+  <div class="container">
+    <h1>{{ section.settings.heading }}</h1>
+    {%- if cart.item_count == 0 -%}
+      <p class="muted">{{ section.settings.empty_text }}</p>
+      <a class="btn" href="{{ routes.all_products_collection_url }}">Continue shopping</a>
+    {%- else -%}
+      <form action="{{ routes.cart_url }}" method="post" novalidate>
+        <div class="grid" style="grid-template-columns:1.6fr .8fr;align-items:start">
+          <div>
+            {%- for item in cart.items -%}
+              <div class="cart-item">
+                <a href="{{ item.url }}">{% if item.image %}<img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title | escape }}" width="88" height="110" loading="lazy">{% endif %}</a>
+                <div>
+                  <a href="{{ item.url }}"><strong>{{ item.product.title }}</strong></a>
+                  {%- unless item.variant.title contains 'Default' -%}<div class="muted" style="font-size:.88rem">{{ item.variant.title }}</div>{%- endunless -%}
+                  <div class="price">{{ item.final_price | money }}</div>
+                  <div class="qty" style="margin-top:8px">
+                    <button type="button" data-qty="down" aria-label="Decrease">&minus;</button>
+                    <input type="number" min="0" value="{{ item.quantity }}" data-line-qty="{{ forloop.index }}" aria-label="Quantity">
+                    <button type="button" data-qty="up" aria-label="Increase">+</button>
+                  </div>
+                  <button type="button" class="link-underline" data-line-remove="{{ forloop.index }}" style="background:none;border:0;padding:8px 0;cursor:pointer">Remove</button>
+                </div>
+                <strong class="price">{{ item.final_line_price | money }}</strong>
+              </div>
+            {%- endfor -%}
+            {%- if settings.cart_show_note -%}
+              <label class="field" style="margin-top:20px"><span>Order note</span><textarea name="note">{{ cart.note }}</textarea></label>
+            {%- endif -%}
+          </div>
+          <div class="cart-summary">
+            {%- if settings.cart_show_free_shipping_bar and settings.cart_free_shipping_threshold > 0 -%}
+              {%- assign thr = settings.cart_free_shipping_threshold | times: 100 -%}
+              {%- if cart.total_price >= thr -%}<p class="muted" style="color:var(--success)">Free shipping unlocked.</p>
+              {%- else -%}<p class="muted">{{ thr | minus: cart.total_price | money }} away from free shipping</p>{%- endif -%}
+              <div class="progress"><span style="width:{% if cart.total_price >= thr %}100{% else %}{{ cart.total_price | times: 100 | divided_by: thr }}{% endif %}%"></span></div>
+            {%- endif -%}
+            <div class="cart-row"><span>Subtotal</span><strong class="price">{{ cart.total_price | money }}</strong></div>
+            <div class="rte muted" style="font-size:.85rem">{{ settings.cart_footer_text }}</div>
+            <button type="submit" name="checkout" class="btn btn--full">{{ section.settings.checkout_label }}</button>
+            {%- if section.settings.show_extra_note != blank -%}<p class="muted" style="font-size:.8rem;margin-top:10px">{{ section.settings.show_extra_note }}</p>{%- endif -%}
+          </div>
+        </div>
+      </form>
+    {%- endif -%}
+  </div>
+</div>
+<style>@media(max-width:900px){.template-cart .grid[style*="1.6fr"]{grid-template-columns:1fr!important}}</style>
+{% schema %}
+{
+  "name": "Cart",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Your cart" },
+    { "type": "text", "id": "empty_text", "label": "Empty cart text", "default": "Your cart is empty." },
+    { "type": "text", "id": "checkout_label", "label": "Checkout button label", "default": "Proceed to checkout" },
+    { "type": "text", "id": "show_extra_note", "label": "Note under checkout", "default": "Items are held for 3 hours." },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Top padding", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 140, "step": 4, "unit": "px", "label": "Bottom padding", "default": 64 }
+  ]
+}
+{% endschema %}

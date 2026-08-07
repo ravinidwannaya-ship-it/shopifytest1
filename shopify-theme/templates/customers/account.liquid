@@ -1,0 +1,22 @@
+<div class="section"><div class="container">
+  <h1>My account</h1>
+  <p><a class="link-underline" href="{{ routes.account_logout_url }}">Log out</a></p>
+  <div class="grid grid--2" style="--cols-mobile:1">
+    <div>
+      <h3>Order history</h3>
+      {%- if customer.orders.size > 0 -%}
+        <table class="spec-table"><tbody>
+          {%- for order in customer.orders -%}
+            <tr><td><a class="link-underline" href="{{ order.customer_url }}">{{ order.name }}</a><br><span class="muted">{{ order.created_at | date: '%d %b %Y' }}</span></td>
+            <td>{{ order.financial_status_label }} / {{ order.fulfillment_status_label }}<br><strong>{{ order.total_price | money }}</strong></td></tr>
+          {%- endfor -%}
+        </tbody></table>
+      {%- else -%}<p class="muted">You have not placed any orders yet.</p>{%- endif -%}
+    </div>
+    <div>
+      <h3>Default address</h3>
+      {%- if customer.default_address -%}{{ customer.default_address | format_address }}{%- else -%}<p class="muted">No address saved.</p>{%- endif -%}
+      <a class="btn btn--outline" href="{{ routes.account_addresses_url }}">Manage addresses</a>
+    </div>
+  </div>
+</div></div>

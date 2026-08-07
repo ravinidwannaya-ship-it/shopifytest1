@@ -1,0 +1,11 @@
+<article class="section" style="padding-top:56px;padding-bottom:64px">
+  <div class="container container--narrow">
+    <p class="eyebrow">{{ article.published_at | date: '%d %B %Y' }}</p>
+    <h1>{{ article.title }}</h1>
+    {%- if article.image -%}<div class="media ratio-landscape" style="margin:20px 0"><img src="{{ article.image | image_url: width: 1200 }}" alt="{{ article.title | escape }}" width="1200" height="675"></div>{%- endif -%}
+    <div class="rte">{{ article.content }}</div>
+  </div>
+</article>
+{% schema %}
+{ "name": "Article" }
+{% endschema %}

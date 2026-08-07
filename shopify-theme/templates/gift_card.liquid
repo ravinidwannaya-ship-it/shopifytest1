@@ -1,0 +1,11 @@
+<div class="gift-card" style="max-width:520px;margin:0 auto;padding:40px 20px;text-align:center">
+  <h1>{{ 'gift_cards.issued.title' | t: value: gift_card.initial_value | default: 'Your gift card' }}</h1>
+  <p>{{ shop.name }}</p>
+  {{ gift_card.qr_identifier }}
+  <p style="font-size:28px;font-weight:600">{{ gift_card.balance | money }}</p>
+  <p style="letter-spacing:.12em">{{ gift_card.code | format_code }}</p>
+  {%- if gift_card.expires_on -%}
+    <p>Expires {{ gift_card.expires_on | date: '%d %b %Y' }}</p>
+  {%- endif -%}
+  <p><a href="{{ shop.url }}">{{ shop.url }}</a></p>
+</div>
