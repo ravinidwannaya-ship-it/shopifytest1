@@ -9,69 +9,35 @@
  */
 {
   "sections": {
-    "17860780675778c741": {
+    "1786102240a1010afa": {
       "type": "_blocks",
       "blocks": {
-        "ai_gen_block_f4ad837_GyHdP7": {
-          "type": "ai_gen_block_f4ad837",
+        "ai_gen_block_d623d62_qydNxW": {
+          "type": "ai_gen_block_d623d62",
           "settings": {
             "logo": "shopify://shop_images/Picsart_26-08-07_08-43-35-482.png",
-            "logo_width": 160,
-            "logo_height": 80,
-            "logo_position": "center",
-            "max_width": 1000,
-            "header_padding_y": 10,
-            "header_padding_x": 16,
-            "enable_sticky": true,
-            "nav_text_size": 12,
-            "nav_spacing": 20,
-            "nav_link_1_text": "NEW LAUNCHES",
-            "nav_link_1_url": "shopify://blogs/news",
-            "nav_link_2_text": "GOLD COATED SILVER IDOLS",
-            "nav_link_2_url": "shopify://pages/contact",
-            "nav_link_3_text": "IDOLS WITH PHOTO FRAME",
-            "nav_link_3_url": "shopify://pages/catologue",
-            "nav_link_4_text": "CORPORATE GIGTING",
-            "nav_link_4_url": "shopify://products/athletic-running-shorts",
-            "nav_link_5_text": "CUSTOMIZE IDOL",
-            "nav_link_5_url": "shopify://pages/catologue",
-            "drawer_title": "Menu",
-            "drawer_width": 310,
-            "drawer_link_1_text": "Home",
-            "drawer_link_1_url": "",
-            "drawer_link_2_text": "Collectio",
-            "drawer_link_2_url": "",
-            "drawer_link_3_text": "About Us",
-            "drawer_link_3_url": "",
-            "drawer_link_4_text": "Contact",
-            "drawer_link_4_url": "",
-            "drawer_link_5_text": "product",
-            "drawer_link_5_url": "",
-            "drawer_link_6_text": "newlink",
-            "drawer_link_6_url": "",
-            "drawer_link_7_text": "LINK1",
-            "drawer_link_7_url": "",
-            "drawer_link_8_text": "TEXT3",
-            "drawer_link_8_url": "",
-            "show_search": true,
-            "show_account": true,
+            "logo_width": 240,
+            "max_width": 1450,
+            "desktop_padding_y": 30,
+            "desktop_padding_x": 40,
             "show_wishlist": true,
-            "wishlist_count": 0,
-            "header_bg_color": "#ffffff",
-            "text_color": "#33261f",
-            "accent_color": "#c9a24b",
-            "border_color": "#e4d8c4",
-            "badge_text_color": "#ffffff",
-            "drawer_bg_color": "#fffdf7",
-            "drawer_text_color": "#33261f",
-            "drawer_hover_bg": "#f3e9d7"
+            "header_bg_color": "#FBF6EC",
+            "icon_color": "#33261F",
+            "icon_hover_color": "#6B1F24",
+            "border_color": "#E4D8C4",
+            "badge_bg_color": "#6B1F24",
+            "badge_text_color": "#FFF8EC"
           },
           "blocks": {}
         }
       },
       "block_order": [
-        "ai_gen_block_f4ad837_GyHdP7"
+        "ai_gen_block_d623d62_qydNxW"
       ],
+      "settings": {}
+    },
+    "17860780675778c741": {
+      "type": "_blocks",
       "settings": {}
     },
     "slideshow": {
@@ -505,6 +471,7 @@
     }
   },
   "order": [
+    "1786102240a1010afa",
     "17860780675778c741",
     "slideshow",
     "trust",
