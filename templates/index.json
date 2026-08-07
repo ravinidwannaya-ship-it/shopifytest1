@@ -14,6 +14,7 @@
       "blocks": {
         "ai_gen_block_f4ad837_GyHdP7": {
           "type": "ai_gen_block_f4ad837",
+          "disabled": true,
           "settings": {
             "logo": "shopify://shop_images/Picsart_26-08-07_08-43-35-482.png",
             "logo_width": 190,
@@ -447,7 +448,7 @@
           "settings": {
             "logo": "shopify://shop_images/Picsart_26-08-07_08-43-35-482.png",
             "logo_width_desktop": 80,
-            "logo_width_mobile": 120,
+            "logo_width_mobile": 80,
             "menu": "main-menu",
             "drawer_title": "Menu",
             "drawer_width": 320,
