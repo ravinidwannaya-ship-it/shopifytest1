@@ -16,8 +16,8 @@
           "type": "ai_gen_block_f4ad837",
           "settings": {
             "logo": "shopify://shop_images/Picsart_26-08-07_08-43-35-482.png",
-            "logo_width": 160,
-            "logo_height": 105,
+            "logo_width": 140,
+            "logo_height": 150,
             "logo_position": "left",
             "max_width": 1440,
             "header_padding_y": 16,
