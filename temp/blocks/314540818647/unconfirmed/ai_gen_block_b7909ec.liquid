@@ -1,6 +1,458 @@
+{% doc %}
+  @prompt
+    Create a mobile-only side navigation drawer block for a premium religious idol store called "The House Of Aradhna". IMPORTANT: Do NOT include any close button inside the drawer. The drawer should close ONLY when the user taps the dark overlay/backdrop outside the drawer. Requirements: 1) Store brand name "The House Of Aradhna" at the top with a decorative gold divider — no close button anywhere. 2) Navigation links: New Launches, Gold Coated Silver Idols, Idols with Photo Frames, Corporate Gifting, Customise Idol — each as a full-width tappable link. 3) A semi-transparent dark overlay/backdrop behind the drawer that closes the drawer when tapped. 4) Smooth slide-in from left, slide-out to left CSS animation. 5) Warm premium styling: ivory or deep charcoal background, gold (#C9A84C) accents for borders and active link states, elegant serif font. 6) Fully responsive — only visible on mobile screens, completely hidden on desktop. 7) Hooks into the existing header hamburger button click event to open the drawer.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-mobile-nav-drawer-{{ ai_gen_id }} {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    pointer-events: none;
+    visibility: hidden;
+  }
+
+  .ai-mobile-nav-drawer-{{ ai_gen_id }}.active {
+    pointer-events: auto;
+    visibility: visible;
+  }
+
+  .ai-mobile-nav-drawer-overlay-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: {{ block.settings.overlay_color }};
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+  }
+
+  .ai-mobile-nav-drawer-{{ ai_gen_id }}.active .ai-mobile-nav-drawer-overlay-{{ ai_gen_id }} {
+    opacity: {{ block.settings.overlay_opacity }};
+  }
+
+  .ai-mobile-nav-drawer-panel-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: {{ block.settings.drawer_width }}%;
+    max-width: 360px;
+    height: 100%;
+    background-color: {{ block.settings.drawer_bg_color }};
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .ai-mobile-nav-drawer-{{ ai_gen_id }}.active .ai-mobile-nav-drawer-panel-{{ ai_gen_id }} {
+    transform: translateX(0);
+  }
+
+  .ai-mobile-nav-drawer-header-{{ ai_gen_id }} {
+    padding: {{ block.settings.header_padding }}px;
+    border-bottom: {{ block.settings.divider_thickness }}px solid {{ block.settings.divider_color }};
+  }
+
+  .ai-mobile-nav-drawer-brand-{{ ai_gen_id }} {
+    font-family: {{ block.settings.brand_font.family }}, {{ block.settings.brand_font.fallback_families }};
+    font-weight: {{ block.settings.brand_font.weight }};
+    font-size: {{ block.settings.brand_size }}px;
+    color: {{ block.settings.brand_color }};
+    margin: 0;
+    text-align: center;
+    letter-spacing: 0.5px;
+  }
+
+  .ai-mobile-nav-drawer-nav-{{ ai_gen_id }} {
+    padding: {{ block.settings.nav_padding }}px 0;
+  }
+
+  .ai-mobile-nav-drawer-link-{{ ai_gen_id }} {
+    display: block;
+    padding: {{ block.settings.link_padding }}px {{ block.settings.header_padding }}px;
+    font-family: {{ block.settings.link_font.family }}, {{ block.settings.link_font.fallback_families }};
+    font-weight: {{ block.settings.link_font.weight }};
+    font-size: {{ block.settings.link_size }}px;
+    color: {{ block.settings.link_color }};
+    text-decoration: none;
+    border-left: 3px solid transparent;
+    transition: all 0.2s ease;
+  }
+
+  .ai-mobile-nav-drawer-link-{{ ai_gen_id }}:hover,
+  .ai-mobile-nav-drawer-link-{{ ai_gen_id }}:active {
+    background-color: {{ block.settings.link_hover_bg }};
+    border-left-color: {{ block.settings.link_active_color }};
+    color: {{ block.settings.link_active_color }};
+  }
+
+  @media screen and (min-width: 750px) {
+    .ai-mobile-nav-drawer-{{ ai_gen_id }} {
+      display: none !important;
+    }
+  }
+{% endstyle %}
+
+<mobile-nav-drawer-{{ ai_gen_id }}
+  class="ai-mobile-nav-drawer-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div
+    class="ai-mobile-nav-drawer-overlay-{{ ai_gen_id }}"
+    aria-label="Close navigation"
+  ></div>
+
+  <nav
+    class="ai-mobile-nav-drawer-panel-{{ ai_gen_id }}"
+    aria-label="Mobile navigation"
+  >
+    <div class="ai-mobile-nav-drawer-header-{{ ai_gen_id }}">
+      <h2 class="ai-mobile-nav-drawer-brand-{{ ai_gen_id }}">
+        {{ block.settings.brand_name }}
+      </h2>
+    </div>
+
+    <div class="ai-mobile-nav-drawer-nav-{{ ai_gen_id }}">
+      {% if block.settings.link_1_text != blank %}
+        <a
+          href="{{ block.settings.link_1_url }}"
+          class="ai-mobile-nav-drawer-link-{{ ai_gen_id }}"
+        >
+          {{ block.settings.link_1_text }}
+        </a>
+      {% endif %}
+
+      {% if block.settings.link_2_text != blank %}
+        <a
+          href="{{ block.settings.link_2_url }}"
+          class="ai-mobile-nav-drawer-link-{{ ai_gen_id }}"
+        >
+          {{ block.settings.link_2_text }}
+        </a>
+      {% endif %}
+
+      {% if block.settings.link_3_text != blank %}
+        <a
+          href="{{ block.settings.link_3_url }}"
+          class="ai-mobile-nav-drawer-link-{{ ai_gen_id }}"
+        >
+          {{ block.settings.link_3_text }}
+        </a>
+      {% endif %}
+
+      {% if block.settings.link_4_text != blank %}
+        <a
+          href="{{ block.settings.link_4_url }}"
+          class="ai-mobile-nav-drawer-link-{{ ai_gen_id }}"
+        >
+          {{ block.settings.link_4_text }}
+        </a>
+      {% endif %}
+
+      {% if block.settings.link_5_text != blank %}
+        <a
+          href="{{ block.settings.link_5_url }}"
+          class="ai-mobile-nav-drawer-link-{{ ai_gen_id }}"
+        >
+          {{ block.settings.link_5_text }}
+        </a>
+      {% endif %}
+    </div>
+  </nav>
+</mobile-nav-drawer-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class MobileNavDrawer{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.overlay = this.querySelector('.ai-mobile-nav-drawer-overlay-{{ ai_gen_id }}');
+        this.panel = this.querySelector('.ai-mobile-nav-drawer-panel-{{ ai_gen_id }}');
+        this.links = this.querySelectorAll('.ai-mobile-nav-drawer-link-{{ ai_gen_id }}');
+      }
+
+      connectedCallback() {
+        this.setupEventListeners();
+        this.listenForHeaderToggle();
+      }
+
+      setupEventListeners() {
+        this.overlay.addEventListener('click', () => this.close());
+
+        this.links.forEach(link => {
+          link.addEventListener('click', () => {
+            setTimeout(() => this.close(), 150);
+          });
+        });
+
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && this.classList.contains('active')) {
+            this.close();
+          }
+        });
+      }
+
+      listenForHeaderToggle() {
+        document.addEventListener('click', (e) => {
+          const hamburger = e.target.closest('.header__icon--menu, [aria-label*="menu" i], [aria-label*="navigation" i], .mobile-nav-toggle, .menu-toggle, .hamburger');
+          
+          if (hamburger) {
+            e.preventDefault();
+            e.stopPropagation();
+            this.open();
+          }
+        });
+      }
+
+      open() {
+        this.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        this.panel.focus();
+      }
+
+      close() {
+        this.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    customElements.define('mobile-nav-drawer-{{ ai_gen_id }}', MobileNavDrawer{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Mobile nav drawer",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Brand"
+    },
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand name",
+      "default": "The House Of Aradhna"
+    },
+    {
+      "type": "font_picker",
+      "id": "brand_font",
+      "label": "Brand font",
+      "default": "serif"
+    },
+    {
+      "type": "range",
+      "id": "brand_size",
+      "label": "Brand name size",
+      "min": 16,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "brand_color",
+      "label": "Brand color",
+      "default": "#2A1A15"
+    },
+    {
+      "type": "header",
+      "content": "Navigation links"
+    },
+    {
+      "type": "text",
+      "id": "link_1_text",
+      "label": "Link 1 text",
+      "default": "New Launches"
+    },
+    {
+      "type": "url",
+      "id": "link_1_url",
+      "label": "Link 1 URL"
+    },
+    {
+      "type": "text",
+      "id": "link_2_text",
+      "label": "Link 2 text",
+      "default": "Gold Coated Silver Idols"
+    },
+    {
+      "type": "url",
+      "id": "link_2_url",
+      "label": "Link 2 URL"
+    },
+    {
+      "type": "text",
+      "id": "link_3_text",
+      "label": "Link 3 text",
+      "default": "Idols with Photo Frames"
+    },
+    {
+      "type": "url",
+      "id": "link_3_url",
+      "label": "Link 3 URL"
+    },
+    {
+      "type": "text",
+      "id": "link_4_text",
+      "label": "Link 4 text",
+      "default": "Corporate Gifting"
+    },
+    {
+      "type": "url",
+      "id": "link_4_url",
+      "label": "Link 4 URL"
+    },
+    {
+      "type": "text",
+      "id": "link_5_text",
+      "label": "Link 5 text",
+      "default": "Customise Idol"
+    },
+    {
+      "type": "url",
+      "id": "link_5_url",
+      "label": "Link 5 URL"
+    },
+    {
+      "type": "header",
+      "content": "Link style"
+    },
+    {
+      "type": "font_picker",
+      "id": "link_font",
+      "label": "Link font",
+      "default": "sans-serif"
+    },
+    {
+      "type": "range",
+      "id": "link_size",
+      "label": "Link size",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Link color",
+      "default": "#33261F"
+    },
+    {
+      "type": "color",
+      "id": "link_hover_bg",
+      "label": "Link hover background",
+      "default": "#F3E9D7"
+    },
+    {
+      "type": "color",
+      "id": "link_active_color",
+      "label": "Active link accent",
+      "default": "#C9A24B"
+    },
+    {
+      "type": "header",
+      "content": "Drawer style"
+    },
+    {
+      "type": "range",
+      "id": "drawer_width",
+      "label": "Drawer width",
+      "min": 70,
+      "max": 95,
+      "step": 5,
+      "unit": "%",
+      "default": 85
+    },
+    {
+      "type": "color",
+      "id": "drawer_bg_color",
+      "label": "Drawer background",
+      "default": "#FFFDF7"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider color",
+      "default": "#C9A24B"
+    },
+    {
+      "type": "range",
+      "id": "divider_thickness",
+      "label": "Divider thickness",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 2
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.5
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "header_padding",
+      "label": "Header padding",
+      "min": 16,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "nav_padding",
+      "label": "Nav top/bottom padding",
+      "min": 8,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "link_padding",
+      "label": "Link vertical padding",
+      "min": 10,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    }
+  ],
+  "presets": [
+    {
+      "name": "Mobile nav drawer"
+    }
+  ]
+}
 {% endschema %}
