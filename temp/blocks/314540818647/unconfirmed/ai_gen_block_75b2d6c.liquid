@@ -1,6 +1,716 @@
+{% doc %}
+  @prompt
+    Create a mobile side navigation drawer section for a premium religious idol store. The drawer should slide in from the left on mobile devices when the hamburger menu (3 horizontal lines) icon is clicked. It should include: a close button (X), store logo/brand name at the top, full navigation menu links, social media icons at the bottom, and smooth open/close animation. Style it with warm earthy premium tones — gold accents, dark background or cream/ivory background with rich text colors. The drawer should overlay the page with a dark backdrop. Make it fully responsive and only visible on mobile screens.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-mobile-nav-drawer-{{ ai_gen_id }} {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    pointer-events: none;
+  }
+
+  .ai-mobile-nav-drawer__backdrop-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: {{ block.settings.backdrop_color }};
+    opacity: 0;
+    transition: opacity {{ block.settings.animation_speed }}ms ease;
+    pointer-events: none;
+  }
+
+  .ai-mobile-nav-drawer-{{ ai_gen_id }}.active .ai-mobile-nav-drawer__backdrop-{{ ai_gen_id }} {
+    opacity: {{ block.settings.backdrop_opacity }};
+    pointer-events: auto;
+  }
+
+  .ai-mobile-nav-drawer__panel-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: {{ block.settings.drawer_width }}%;
+    max-width: {{ block.settings.drawer_max_width }}px;
+    height: 100%;
+    background-color: {{ block.settings.drawer_bg_color }};
+    transform: translateX(-100%);
+    transition: transform {{ block.settings.animation_speed }}ms ease;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .ai-mobile-nav-drawer-{{ ai_gen_id }}.active .ai-mobile-nav-drawer__panel-{{ ai_gen_id }} {
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+
+  .ai-mobile-nav-drawer__header-{{ ai_gen_id }} {
+    padding: {{ block.settings.header_padding }}px;
+    border-bottom: 1px solid {{ block.settings.divider_color }};
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+
+  .ai-mobile-nav-drawer__logo-wrapper-{{ ai_gen_id }} {
+    flex-grow: 1;
+  }
+
+  .ai-mobile-nav-drawer__logo-{{ ai_gen_id }} {
+    max-width: {{ block.settings.logo_width }}px;
+    height: auto;
+    display: block;
+  }
+
+  .ai-mobile-nav-drawer__brand-name-{{ ai_gen_id }} {
+    font-size: {{ block.settings.brand_name_size }}px;
+    font-weight: 600;
+    color: {{ block.settings.text_color }};
+    margin: 0;
+    font-family: {{ block.settings.heading_font.family }}, {{ block.settings.heading_font.fallback_families }};
+  }
+
+  .ai-mobile-nav-drawer__close-{{ ai_gen_id }} {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    color: {{ block.settings.text_color }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .ai-mobile-nav-drawer__close-{{ ai_gen_id }}:hover {
+    opacity: 0.7;
+  }
+
+  .ai-mobile-nav-drawer__close-{{ ai_gen_id }} svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .ai-mobile-nav-drawer__content-{{ ai_gen_id }} {
+    flex-grow: 1;
+    padding: {{ block.settings.content_padding }}px;
+    overflow-y: auto;
+  }
+
+  .ai-mobile-nav-drawer__nav-{{ ai_gen_id }} {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .ai-mobile-nav-drawer__nav-item-{{ ai_gen_id }} {
+    margin-bottom: {{ block.settings.link_spacing }}px;
+  }
+
+  .ai-mobile-nav-drawer__nav-link-{{ ai_gen_id }} {
+    display: block;
+    padding: {{ block.settings.link_padding }}px 0;
+    color: {{ block.settings.link_color }};
+    text-decoration: none;
+    font-size: {{ block.settings.link_size }}px;
+    font-weight: {{ block.settings.link_weight }};
+    transition: color 0.2s ease;
+    border-bottom: 1px solid {{ block.settings.divider_color }};
+  }
+
+  .ai-mobile-nav-drawer__nav-link-{{ ai_gen_id }}:hover {
+    color: {{ block.settings.link_hover_color }};
+  }
+
+  .ai-mobile-nav-drawer__footer-{{ ai_gen_id }} {
+    padding: {{ block.settings.footer_padding }}px;
+    border-top: 1px solid {{ block.settings.divider_color }};
+    flex-shrink: 0;
+  }
+
+  .ai-mobile-nav-drawer__social-{{ ai_gen_id }} {
+    display: flex;
+    gap: {{ block.settings.social_gap }}px;
+    align-items: center;
+    justify-content: {{ block.settings.social_alignment }};
+  }
+
+  .ai-mobile-nav-drawer__social-link-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: {{ block.settings.social_icon_size }}px;
+    height: {{ block.settings.social_icon_size }}px;
+    color: {{ block.settings.social_icon_color }};
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+
+  .ai-mobile-nav-drawer__social-link-{{ ai_gen_id }}:hover {
+    color: {{ block.settings.social_icon_hover_color }};
+    transform: scale(1.1);
+  }
+
+  .ai-mobile-nav-drawer__social-link-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .ai-mobile-nav-drawer__hamburger-{{ ai_gen_id }} {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    color: {{ block.settings.hamburger_color }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s ease;
+  }
+
+  .ai-mobile-nav-drawer__hamburger-{{ ai_gen_id }}:hover {
+    opacity: 0.7;
+  }
+
+  .ai-mobile-nav-drawer__hamburger-{{ ai_gen_id }} svg {
+    width: {{ block.settings.hamburger_size }}px;
+    height: {{ block.settings.hamburger_size }}px;
+  }
+
+  @media screen and (min-width: {{ block.settings.hide_above_width }}px) {
+    .ai-mobile-nav-drawer-{{ ai_gen_id }},
+    .ai-mobile-nav-drawer__hamburger-{{ ai_gen_id }} {
+      display: none;
+    }
+  }
+
+  body.ai-mobile-nav-drawer-open-{{ ai_gen_id }} {
+    overflow: hidden;
+  }
+{% endstyle %}
+
+<mobile-nav-drawer-{{ ai_gen_id }} class="ai-mobile-nav-drawer-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-mobile-nav-drawer__backdrop-{{ ai_gen_id }}"></div>
+  
+  <div class="ai-mobile-nav-drawer__panel-{{ ai_gen_id }}">
+    <div class="ai-mobile-nav-drawer__header-{{ ai_gen_id }}">
+      <div class="ai-mobile-nav-drawer__logo-wrapper-{{ ai_gen_id }}">
+        {% if block.settings.logo != blank %}
+          <img
+            src="{{ block.settings.logo | image_url: width: 400 }}"
+            alt="{{ shop.name }}"
+            class="ai-mobile-nav-drawer__logo-{{ ai_gen_id }}"
+            width="{{ block.settings.logo.width }}"
+            height="{{ block.settings.logo.height }}"
+            loading="lazy"
+          >
+        {% elsif block.settings.brand_name != blank %}
+          <h2 class="ai-mobile-nav-drawer__brand-name-{{ ai_gen_id }}">{{ block.settings.brand_name }}</h2>
+        {% else %}
+          <h2 class="ai-mobile-nav-drawer__brand-name-{{ ai_gen_id }}">{{ shop.name }}</h2>
+        {% endif %}
+      </div>
+      
+      <button
+        class="ai-mobile-nav-drawer__close-{{ ai_gen_id }}"
+        aria-label="Close navigation menu"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="ai-mobile-nav-drawer__content-{{ ai_gen_id }}">
+      <nav>
+        <ul class="ai-mobile-nav-drawer__nav-{{ ai_gen_id }}">
+          {% for link in linklists[block.settings.menu].links %}
+            <li class="ai-mobile-nav-drawer__nav-item-{{ ai_gen_id }}">
+              <a href="{{ link.url }}" class="ai-mobile-nav-drawer__nav-link-{{ ai_gen_id }}">
+                {{ link.title }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </nav>
+    </div>
+
+    <div class="ai-mobile-nav-drawer__footer-{{ ai_gen_id }}">
+      <div class="ai-mobile-nav-drawer__social-{{ ai_gen_id }}">
+        {% if block.settings.instagram_url != blank %}
+          <a
+            href="{{ block.settings.instagram_url }}"
+            class="ai-mobile-nav-drawer__social-link-{{ ai_gen_id }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+        {% endif %}
+
+        {% if block.settings.facebook_url != blank %}
+          <a
+            href="{{ block.settings.facebook_url }}"
+            class="ai-mobile-nav-drawer__social-link-{{ ai_gen_id }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Facebook"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+            </svg>
+          </a>
+        {% endif %}
+
+        {% if block.settings.youtube_url != blank %}
+          <a
+            href="{{ block.settings.youtube_url }}"
+            class="ai-mobile-nav-drawer__social-link-{{ ai_gen_id }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="YouTube"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+              <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+            </svg>
+          </a>
+        {% endif %}
+
+        {% if block.settings.whatsapp_number != blank %}
+          <a
+            href="https://wa.me/{{ block.settings.whatsapp_number }}"
+            class="ai-mobile-nav-drawer__social-link-{{ ai_gen_id }}"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="WhatsApp"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+            </svg>
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</mobile-nav-drawer-{{ ai_gen_id }}>
+
+<button
+  class="ai-mobile-nav-drawer__hamburger-{{ ai_gen_id }}"
+  aria-label="Open navigation menu"
+  aria-expanded="false"
+  data-drawer-trigger="{{ ai_gen_id }}"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="3" y1="12" x2="21" y2="12"></line>
+    <line x1="3" y1="6" x2="21" y2="6"></line>
+    <line x1="3" y1="18" x2="21" y2="18"></line>
+  </svg>
+</button>
+
+<script>
+  (function() {
+    class MobileNavDrawer{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.drawer = this;
+        this.backdrop = this.querySelector('.ai-mobile-nav-drawer__backdrop-{{ ai_gen_id }}');
+        this.closeButton = this.querySelector('.ai-mobile-nav-drawer__close-{{ ai_gen_id }}');
+        this.hamburger = document.querySelector('[data-drawer-trigger="{{ ai_gen_id }}"]');
+      }
+
+      connectedCallback() {
+        this.setupEventListeners();
+      }
+
+      setupEventListeners() {
+        if (this.hamburger) {
+          this.hamburger.addEventListener('click', () => this.open());
+        }
+
+        if (this.closeButton) {
+          this.closeButton.addEventListener('click', () => this.close());
+        }
+
+        if (this.backdrop) {
+          this.backdrop.addEventListener('click', () => this.close());
+        }
+
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && this.drawer.classList.contains('active')) {
+            this.close();
+          }
+        });
+
+        const links = this.querySelectorAll('.ai-mobile-nav-drawer__nav-link-{{ ai_gen_id }}');
+        links.forEach(link => {
+          link.addEventListener('click', () => {
+            this.close();
+          });
+        });
+      }
+
+      open() {
+        this.drawer.classList.add('active');
+        document.body.classList.add('ai-mobile-nav-drawer-open-{{ ai_gen_id }}');
+        if (this.hamburger) {
+          this.hamburger.setAttribute('aria-expanded', 'true');
+        }
+      }
+
+      close() {
+        this.drawer.classList.remove('active');
+        document.body.classList.remove('ai-mobile-nav-drawer-open-{{ ai_gen_id }}');
+        if (this.hamburger) {
+          this.hamburger.setAttribute('aria-expanded', 'false');
+        }
+      }
+    }
+
+    customElements.define('mobile-nav-drawer-{{ ai_gen_id }}', MobileNavDrawer{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Mobile navigation drawer",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Drawer appearance"
+    },
+    {
+      "type": "range",
+      "id": "drawer_width",
+      "label": "Width",
+      "min": 70,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 85
+    },
+    {
+      "type": "range",
+      "id": "drawer_max_width",
+      "label": "Maximum width",
+      "min": 250,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "default": 360
+    },
+    {
+      "type": "color",
+      "id": "drawer_bg_color",
+      "label": "Background",
+      "default": "#FFFDF7"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#2A1A15"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider",
+      "default": "#E4D8C4"
+    },
+    {
+      "type": "range",
+      "id": "animation_speed",
+      "label": "Animation speed",
+      "min": 200,
+      "max": 600,
+      "step": 50,
+      "unit": "ms",
+      "default": 300
+    },
+    {
+      "type": "header",
+      "content": "Backdrop"
+    },
+    {
+      "type": "color",
+      "id": "backdrop_color",
+      "label": "Backdrop color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "backdrop_opacity",
+      "label": "Backdrop opacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.5
+    },
+    {
+      "type": "header",
+      "content": "Logo and brand"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo width",
+      "min": 80,
+      "max": 250,
+      "step": 10,
+      "unit": "px",
+      "default": 140
+    },
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand name"
+    },
+    {
+      "type": "range",
+      "id": "brand_name_size",
+      "label": "Brand name size",
+      "min": 16,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "font_picker",
+      "id": "heading_font",
+      "label": "Brand name font",
+      "default": "assistant_n4"
+    },
+    {
+      "type": "range",
+      "id": "header_padding",
+      "label": "Header padding",
+      "min": 12,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Navigation menu"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "range",
+      "id": "content_padding",
+      "label": "Content padding",
+      "min": 12,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Link color",
+      "default": "#33261F"
+    },
+    {
+      "type": "color",
+      "id": "link_hover_color",
+      "label": "Link hover color",
+      "default": "#C9A24B"
+    },
+    {
+      "type": "range",
+      "id": "link_size",
+      "label": "Link size",
+      "min": 14,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "link_weight",
+      "label": "Link weight",
+      "min": 300,
+      "max": 700,
+      "step": 100,
+      "default": 500
+    },
+    {
+      "type": "range",
+      "id": "link_padding",
+      "label": "Link padding",
+      "min": 8,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "link_spacing",
+      "label": "Space between links",
+      "min": 0,
+      "max": 16,
+      "step": 2,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Social media"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram"
+    },
+    {
+      "type": "url",
+      "id": "facebook_url",
+      "label": "Facebook"
+    },
+    {
+      "type": "url",
+      "id": "youtube_url",
+      "label": "YouTube"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_number",
+      "label": "WhatsApp number"
+    },
+    {
+      "type": "range",
+      "id": "footer_padding",
+      "label": "Footer padding",
+      "min": 12,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "social_icon_color",
+      "label": "Icon color",
+      "default": "#7A6A5C"
+    },
+    {
+      "type": "color",
+      "id": "social_icon_hover_color",
+      "label": "Icon hover color",
+      "default": "#C9A24B"
+    },
+    {
+      "type": "range",
+      "id": "social_icon_size",
+      "label": "Icon size",
+      "min": 20,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "social_gap",
+      "label": "Space between icons",
+      "min": 8,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "social_alignment",
+      "label": "Icon alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Hamburger menu icon"
+    },
+    {
+      "type": "color",
+      "id": "hamburger_color",
+      "label": "Icon color",
+      "default": "#33261F"
+    },
+    {
+      "type": "range",
+      "id": "hamburger_size",
+      "label": "Icon size",
+      "min": 20,
+      "max": 36,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "header",
+      "content": "Visibility"
+    },
+    {
+      "type": "range",
+      "id": "hide_above_width",
+      "label": "Hide above screen width",
+      "min": 750,
+      "max": 1200,
+      "step": 50,
+      "unit": "px",
+      "default": 750
+    }
+  ],
+  "presets": [
+    {
+      "name": "Mobile navigation drawer"
+    }
+  ]
+}
 {% endschema %}
