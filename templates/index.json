@@ -14,11 +14,10 @@
       "blocks": {
         "ai_gen_block_f4ad837_GyHdP7": {
           "type": "ai_gen_block_f4ad837",
-          "disabled": true,
           "settings": {
             "logo": "shopify://shop_images/Picsart_26-08-07_08-43-35-482.png",
-            "logo_width": 190,
-            "logo_height": 70,
+            "logo_width": 160,
+            "logo_height": 105,
             "logo_position": "left",
             "max_width": 1440,
             "header_padding_y": 16,
@@ -26,11 +25,11 @@
             "enable_sticky": true,
             "nav_text_size": 16,
             "nav_spacing": 24,
-            "nav_link_1_text": "Collections",
+            "nav_link_1_text": "NEW LAUNCHES",
             "nav_link_1_url": "",
-            "nav_link_2_text": "About",
+            "nav_link_2_text": "GOLD COATED SILVER IDOLS",
             "nav_link_2_url": "",
-            "nav_link_3_text": "Contact",
+            "nav_link_3_text": "IDOLS WITH PHOTO FRAME",
             "nav_link_3_url": "",
             "nav_link_4_text": "",
             "nav_link_4_url": "",
@@ -445,6 +444,7 @@
       "blocks": {
         "ai_gen_block_90540ff_PzhgjX": {
           "type": "ai_gen_block_90540ff",
+          "disabled": true,
           "settings": {
             "logo": "shopify://shop_images/Picsart_26-08-07_08-43-35-482.png",
             "logo_width_desktop": 80,
@@ -463,20 +463,43 @@
             "header_height_mobile": 60,
             "horizontal_padding": 32,
             "horizontal_padding_mobile": 16,
-            "header_bg_color": "#FBF6EC",
-            "icon_color": "#33261F",
-            "border_color": "#E4D8C4",
-            "cart_badge_bg": "#6B1F24",
-            "cart_badge_text": "#FFF8EC",
-            "drawer_bg_color": "#FFFDF7",
-            "drawer_text_color": "#33261F",
-            "drawer_link_hover_color": "#6B1F24"
+            "header_bg_color": "#fbf6ec",
+            "icon_color": "#33261f",
+            "border_color": "#e4d8c4",
+            "cart_badge_bg": "#6b1f24",
+            "cart_badge_text": "#fff8ec",
+            "drawer_bg_color": "#fffdf7",
+            "drawer_text_color": "#33261f",
+            "drawer_link_hover_color": "#6b1f24"
           },
           "blocks": {}
         }
       },
       "block_order": [
         "ai_gen_block_90540ff_PzhgjX"
+      ],
+      "settings": {}
+    },
+    "17860987966541f0c1": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_7d1772f_f9p7Pm": {
+          "type": "ai_gen_block_7d1772f",
+          "settings": {
+            "header_height": 80,
+            "logo_width": 190,
+            "logo_height": 60,
+            "nav_font_size": 16,
+            "nav_color": "#33261F",
+            "nav_hover_color": "#6B1F24",
+            "force_single_row": true,
+            "icon_size": 20
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_7d1772f_f9p7Pm"
       ],
       "settings": {}
     }
@@ -491,6 +514,7 @@
     "process",
     "testimonials",
     "faq",
-    "1786081984ac44974d"
+    "1786081984ac44974d",
+    "17860987966541f0c1"
   ]
 }

@@ -41,6 +41,8 @@
     },
     "header": {
       "type": "header",
+      "disabled": true,
+      "custom_css": [],
       "settings": {
         "menu": "main-menu",
         "sticky": true,
