@@ -9,6 +9,71 @@
  */
 {
   "sections": {
+    "17860780675778c741": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_f4ad837_GyHdP7": {
+          "type": "ai_gen_block_f4ad837",
+          "settings": {
+            "logo": "shopify://shop_images/Picsart_26-08-07_08-43-35-482.png",
+            "logo_width": 300,
+            "logo_height": 85,
+            "logo_position": "left",
+            "max_width": 1120,
+            "header_padding_y": 12,
+            "header_padding_x": 24,
+            "enable_sticky": true,
+            "nav_text_size": 15,
+            "nav_spacing": 32,
+            "nav_link_1_text": "Collections",
+            "nav_link_1_url": "",
+            "nav_link_2_text": "About",
+            "nav_link_2_url": "",
+            "nav_link_3_text": "Contact",
+            "nav_link_3_url": "",
+            "nav_link_4_text": "",
+            "nav_link_4_url": "",
+            "nav_link_5_text": "",
+            "nav_link_5_url": "",
+            "drawer_title": "Menu",
+            "drawer_width": 280,
+            "drawer_link_1_text": "Home",
+            "drawer_link_1_url": "",
+            "drawer_link_2_text": "Collectio",
+            "drawer_link_2_url": "",
+            "drawer_link_3_text": "About Us",
+            "drawer_link_3_url": "",
+            "drawer_link_4_text": "Contact",
+            "drawer_link_4_url": "",
+            "drawer_link_5_text": "product",
+            "drawer_link_5_url": "",
+            "drawer_link_6_text": "newlink",
+            "drawer_link_6_url": "",
+            "drawer_link_7_text": "",
+            "drawer_link_7_url": "",
+            "drawer_link_8_text": "",
+            "drawer_link_8_url": "",
+            "show_search": true,
+            "show_account": true,
+            "show_wishlist": true,
+            "wishlist_count": 0,
+            "header_bg_color": "#FBF6EC",
+            "text_color": "#33261F",
+            "accent_color": "#C9A24B",
+            "border_color": "#E4D8C4",
+            "badge_text_color": "#FFFFFF",
+            "drawer_bg_color": "#FFFDF7",
+            "drawer_text_color": "#33261F",
+            "drawer_hover_bg": "#F3E9D7"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_f4ad837_GyHdP7"
+      ],
+      "settings": {}
+    },
     "slideshow": {
       "type": "slideshow",
       "blocks": {
@@ -373,74 +438,10 @@
         "padding_top": 64,
         "padding_bottom": 64
       }
-    },
-    "17860780675778c741": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_f4ad837_GyHdP7": {
-          "type": "ai_gen_block_f4ad837",
-          "settings": {
-            "logo": "shopify://shop_images/Picsart_26-08-07_08-43-35-482.png",
-            "logo_width": 160,
-            "logo_height": 60,
-            "logo_position": "left",
-            "max_width": 1280,
-            "header_padding_y": 20,
-            "header_padding_x": 32,
-            "enable_sticky": true,
-            "nav_text_size": 15,
-            "nav_spacing": 32,
-            "nav_link_1_text": "Collections",
-            "nav_link_1_url": "",
-            "nav_link_2_text": "About",
-            "nav_link_2_url": "",
-            "nav_link_3_text": "Contact",
-            "nav_link_3_url": "",
-            "nav_link_4_text": "",
-            "nav_link_4_url": "",
-            "nav_link_5_text": "",
-            "nav_link_5_url": "",
-            "drawer_title": "Menu",
-            "drawer_width": 320,
-            "drawer_link_1_text": "Home",
-            "drawer_link_1_url": "",
-            "drawer_link_2_text": "Collectio",
-            "drawer_link_2_url": "",
-            "drawer_link_3_text": "About Us",
-            "drawer_link_3_url": "",
-            "drawer_link_4_text": "Contact",
-            "drawer_link_4_url": "",
-            "drawer_link_5_text": "product",
-            "drawer_link_5_url": "",
-            "drawer_link_6_text": "newlink",
-            "drawer_link_6_url": "",
-            "drawer_link_7_text": "",
-            "drawer_link_7_url": "",
-            "drawer_link_8_text": "",
-            "drawer_link_8_url": "",
-            "show_search": true,
-            "show_account": true,
-            "show_wishlist": true,
-            "wishlist_count": 0,
-            "header_bg_color": "#FBF6EC",
-            "text_color": "#33261F",
-            "accent_color": "#C9A24B",
-            "border_color": "#E4D8C4",
-            "badge_text_color": "#FFFFFF",
-            "drawer_bg_color": "#FFFDF7",
-            "drawer_text_color": "#33261F",
-            "drawer_hover_bg": "#F3E9D7"
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_f4ad837_GyHdP7"
-      ],
-      "settings": {}
     }
   },
   "order": [
+    "17860780675778c741",
     "slideshow",
     "trust",
     "collections",
@@ -448,7 +449,6 @@
     "story",
     "process",
     "testimonials",
-    "faq",
-    "17860780675778c741"
+    "faq"
   ]
 }
