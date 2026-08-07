@@ -21,18 +21,37 @@
             "desktop_padding_y": 10,
             "desktop_padding_x": 16,
             "show_wishlist": true,
-            "header_bg_color": "#FBF6EC",
-            "icon_color": "#33261F",
-            "icon_hover_color": "#6B1F24",
-            "border_color": "#E4D8C4",
-            "badge_bg_color": "#6B1F24",
-            "badge_text_color": "#FFF8EC"
+            "header_bg_color": "#fbf6ec",
+            "icon_color": "#33261f",
+            "icon_hover_color": "#6b1f24",
+            "border_color": "#e4d8c4",
+            "badge_bg_color": "#6b1f24",
+            "badge_text_color": "#fff8ec"
+          },
+          "blocks": {}
+        },
+        "ai_gen_block_1a89523_X9Fi83": {
+          "type": "ai_gen_block_1a89523",
+          "disabled": true,
+          "settings": {
+            "logo": "shopify://shop_images/Picsart_26-08-07_08-43-35-482.png",
+            "logo_link": "",
+            "logo_width_desktop": 240,
+            "logo_width_mobile": 70,
+            "alignment": "center",
+            "tagline": "",
+            "tagline_font_size": 14,
+            "tagline_color": "#7A6A5C",
+            "padding_top": 40,
+            "padding_bottom": 40,
+            "background_color": "#FBF6EC"
           },
           "blocks": {}
         }
       },
       "block_order": [
-        "ai_gen_block_d623d62_qydNxW"
+        "ai_gen_block_d623d62_qydNxW",
+        "ai_gen_block_1a89523_X9Fi83"
       ],
       "settings": {}
     },
@@ -456,8 +475,8 @@
             "logo_width": 190,
             "logo_height": 60,
             "nav_font_size": 16,
-            "nav_color": "#33261F",
-            "nav_hover_color": "#6B1F24",
+            "nav_color": "#33261f",
+            "nav_hover_color": "#6b1f24",
             "force_single_row": true,
             "icon_size": 20
           },
@@ -467,6 +486,10 @@
       "block_order": [
         "ai_gen_block_7d1772f_f9p7Pm"
       ],
+      "settings": {}
+    },
+    "1786103024b9fc9625": {
+      "type": "_blocks",
       "settings": {}
     }
   },
@@ -482,6 +505,7 @@
     "testimonials",
     "faq",
     "1786081984ac44974d",
-    "17860987966541f0c1"
+    "17860987966541f0c1",
+    "1786103024b9fc9625"
   ]
 }
