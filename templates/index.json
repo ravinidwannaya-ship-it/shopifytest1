@@ -497,6 +497,7 @@
       "blocks": {
         "ai_gen_block_effb496_Xd3ct3": {
           "type": "ai_gen_block_effb496",
+          "disabled": true,
           "settings": {
             "brand_name": "The House Of Aradhna",
             "brand_font": "serif",
