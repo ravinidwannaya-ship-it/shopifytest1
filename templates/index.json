@@ -17,7 +17,7 @@
           "settings": {
             "logo": "shopify://shop_images/Picsart_26-08-07_08-43-35-482.png",
             "logo_width": 240,
-            "max_width": 1450,
+            "max_width": 1100,
             "desktop_padding_y": 30,
             "desktop_padding_x": 40,
             "show_wishlist": true,
