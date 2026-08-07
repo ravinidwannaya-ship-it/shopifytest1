@@ -37,9 +37,9 @@
     "heading_transform": "none",
     "heading_letter_spacing": 0,
     "eyebrow_letter_spacing": 3,
-    "page_width": 1280,
-    "section_spacing": 64,
-    "grid_gap": 24,
+    "page_width": 1200,
+    "section_spacing": 48,
+    "grid_gap": 16,
     "corner_radius": 4,
     "card_shadow": 10,
     "show_section_dividers": false,
@@ -82,6 +82,7 @@
     "notice_bg": "#2A1A15",
     "notice_text": "#FFF8EC",
     "notice_dismissible": true,
+    "custom_css": "*, *::before, *::after { box-sizing: border-box; }\nhtml, body { width: 100%; max-width: 100%; overflow-x: hidden; }\nimg, svg, video, iframe, embed, object { max-width: 100%; }\nimg, video { height: auto; }\npre, code { max-width: 100%; overflow-x: auto; }\n@media screen and (max-width: 749px) {\n  :root { --page-width: 100%; }\n  .page-width, .page-width--narrow, .section, .section__wrapper, .content-container, .container { width: 100%; max-width: 100%; }\n  .page-width, .section__wrapper, .content-container, .container { padding-left: 16px; padding-right: 16px; }\n  .section { padding-top: 32px; padding-bottom: 32px; }\n  .grid, .multicolumn-list, .collection-list, .product-grid { width: 100%; max-width: 100%; margin-left: 0; margin-right: 0; }\n  .grid__item, .multicolumn-card, .card-wrapper { min-width: 0; max-width: 100%; }\n  .rte, .text-content, .rich-text { overflow-wrap: anywhere; word-break: break-word; }\n  table { display: block; width: 100%; max-width: 100%; overflow-x: auto; }\n  .button, button, input, select, textarea { max-width: 100%; }\n}",
     "content_for_index": []
   }
 }
