@@ -16,10 +16,10 @@
           "type": "ai_gen_block_d623d62",
           "settings": {
             "logo": "shopify://shop_images/Picsart_26-08-07_08-43-35-482.png",
-            "logo_width": 240,
+            "logo_width": 80,
             "max_width": 1100,
-            "desktop_padding_y": 30,
-            "desktop_padding_x": 40,
+            "desktop_padding_y": 10,
+            "desktop_padding_x": 16,
             "show_wishlist": true,
             "header_bg_color": "#FBF6EC",
             "icon_color": "#33261F",
