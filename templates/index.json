@@ -523,6 +523,49 @@
         "ai_gen_block_effb496_Xd3ct3"
       ],
       "settings": {}
+    },
+    "1786109609b9477070": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_b7909ec_g7LYNJ": {
+          "type": "ai_gen_block_b7909ec",
+          "settings": {
+            "brand_name": "The House Of Aradhna",
+            "brand_font": "serif",
+            "brand_size": 20,
+            "brand_color": "#2A1A15",
+            "link_1_text": "New Launches",
+            "link_1_url": "",
+            "link_2_text": "Gold Coated Silver Idols",
+            "link_2_url": "",
+            "link_3_text": "Idols with Photo Frames",
+            "link_3_url": "",
+            "link_4_text": "Corporate Gifting",
+            "link_4_url": "",
+            "link_5_text": "Customise Idol",
+            "link_5_url": "",
+            "link_font": "system_ui_n4",
+            "link_size": 16,
+            "link_color": "#33261F",
+            "link_hover_bg": "#F3E9D7",
+            "link_active_color": "#C9A24B",
+            "drawer_width": 85,
+            "drawer_bg_color": "#FFFDF7",
+            "divider_color": "#C9A24B",
+            "divider_thickness": 2,
+            "overlay_color": "#000000",
+            "overlay_opacity": 0.5,
+            "header_padding": 24,
+            "nav_padding": 16,
+            "link_padding": 16
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_b7909ec_g7LYNJ"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -539,6 +582,7 @@
     "1786081984ac44974d",
     "17860987966541f0c1",
     "1786103024b9fc9625",
-    "1786108873422dbffe"
+    "1786108873422dbffe",
+    "1786109609b9477070"
   ]
 }
