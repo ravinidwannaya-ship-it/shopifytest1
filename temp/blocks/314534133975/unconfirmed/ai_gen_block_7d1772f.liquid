@@ -1,6 +1,216 @@
+{% doc %}
+  @prompt
+    Create a custom header customization block for the House of Aradhna store with the following controls, all applied via CSS custom properties so they don't break the existing header structure:
+    
+    1. Header height — adjustable min-height on the header element without affecting layout flow
+    2. Logo width and height — constrain the header logo image dimensions independently
+    3. Navigation menu font size — control the size of nav link text
+    4. Navigation menu font color — control the text color of nav links (normal and hover state)
+    5. Navigation layout — force all nav links into a single horizontal line (no wrapping), keeping them on one row
+    6. Icon size (cart, account, search icons in header) — scale the SVG/icon elements independently without affecting header height
+    
+    All controls should be scoped to the header section only. Use CSS variables or targeted selectors so changes don't cascade to other sections. The block should be a theme block that can be added inside the Header section in the Online Store Editor, with settings fields (range sliders for sizes, color pickers for colors) so the merchant can adjust values without touching code.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-header-customizer-{{ ai_gen_id }} {
+    display: block;
+  }
+
+  .shopify-section-header {
+    --ai-header-height-{{ ai_gen_id }}: {{ block.settings.header_height }}px;
+    --ai-logo-width-{{ ai_gen_id }}: {{ block.settings.logo_width }}px;
+    --ai-logo-height-{{ ai_gen_id }}: {{ block.settings.logo_height }}px;
+    --ai-nav-font-size-{{ ai_gen_id }}: {{ block.settings.nav_font_size }}px;
+    --ai-nav-color-{{ ai_gen_id }}: {{ block.settings.nav_color }};
+    --ai-nav-hover-color-{{ ai_gen_id }}: {{ block.settings.nav_hover_color }};
+    --ai-icon-size-{{ ai_gen_id }}: {{ block.settings.icon_size }}px;
+  }
+
+  .shopify-section-header .header,
+  .shopify-section-header header {
+    min-height: var(--ai-header-height-{{ ai_gen_id }}) !important;
+  }
+
+  .shopify-section-header .header__heading-logo img,
+  .shopify-section-header .header__logo img,
+  .shopify-section-header .logo img {
+    width: var(--ai-logo-width-{{ ai_gen_id }}) !important;
+    height: var(--ai-logo-height-{{ ai_gen_id }}) !important;
+    object-fit: contain;
+  }
+
+  .shopify-section-header .header__menu nav,
+  .shopify-section-header .header__inline-menu,
+  .shopify-section-header nav[role="navigation"],
+  .shopify-section-header .menu {
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  .shopify-section-header .header__menu nav ul,
+  .shopify-section-header .header__inline-menu ul,
+  .shopify-section-header nav[role="navigation"] ul,
+  .shopify-section-header .menu ul {
+    display: flex;
+    flex-wrap: {% if block.settings.force_single_row %}nowrap{% else %}wrap{% endif %};
+    gap: 8px;
+  }
+
+  .shopify-section-header .header__menu a,
+  .shopify-section-header .header__inline-menu a,
+  .shopify-section-header nav[role="navigation"] a,
+  .shopify-section-header .menu a,
+  .shopify-section-header .header__menu-item,
+  .shopify-section-header .list-menu__item a {
+    font-size: var(--ai-nav-font-size-{{ ai_gen_id }}) !important;
+    color: var(--ai-nav-color-{{ ai_gen_id }}) !important;
+  }
+
+  .shopify-section-header .header__menu a:hover,
+  .shopify-section-header .header__inline-menu a:hover,
+  .shopify-section-header nav[role="navigation"] a:hover,
+  .shopify-section-header .menu a:hover,
+  .shopify-section-header .header__menu-item:hover,
+  .shopify-section-header .list-menu__item a:hover {
+    color: var(--ai-nav-hover-color-{{ ai_gen_id }}) !important;
+  }
+
+  .shopify-section-header .header__icon,
+  .shopify-section-header .header__icons .icon,
+  .shopify-section-header .header__icon svg,
+  .shopify-section-header .header__icons svg,
+  .shopify-section-header .icon-cart,
+  .shopify-section-header .icon-account,
+  .shopify-section-header .icon-search {
+    width: var(--ai-icon-size-{{ ai_gen_id }}) !important;
+    height: var(--ai-icon-size-{{ ai_gen_id }}) !important;
+  }
+
+  @media screen and (max-width: 749px) {
+    .shopify-section-header .header,
+    .shopify-section-header header {
+      min-height: calc(var(--ai-header-height-{{ ai_gen_id }}) * 0.8) !important;
+    }
+
+    .shopify-section-header .header__heading-logo img,
+    .shopify-section-header .header__logo img,
+    .shopify-section-header .logo img {
+      width: calc(var(--ai-logo-width-{{ ai_gen_id }}) * 0.8) !important;
+      height: calc(var(--ai-logo-height-{{ ai_gen_id }}) * 0.8) !important;
+    }
+
+    .shopify-section-header .header__icon,
+    .shopify-section-header .header__icons .icon,
+    .shopify-section-header .header__icon svg,
+    .shopify-section-header .header__icons svg,
+    .shopify-section-header .icon-cart,
+    .shopify-section-header .icon-account,
+    .shopify-section-header .icon-search {
+      width: calc(var(--ai-icon-size-{{ ai_gen_id }}) * 0.9) !important;
+      height: calc(var(--ai-icon-size-{{ ai_gen_id }}) * 0.9) !important;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-header-customizer-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+</div>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Header customization",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header dimensions"
+    },
+    {
+      "type": "range",
+      "id": "header_height",
+      "label": "Header height",
+      "min": 50,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo width",
+      "min": 80,
+      "max": 300,
+      "step": 5,
+      "unit": "px",
+      "default": 190
+    },
+    {
+      "type": "range",
+      "id": "logo_height",
+      "label": "Logo height",
+      "min": 30,
+      "max": 120,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Navigation menu"
+    },
+    {
+      "type": "range",
+      "id": "nav_font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "nav_color",
+      "label": "Text color",
+      "default": "#33261F"
+    },
+    {
+      "type": "color",
+      "id": "nav_hover_color",
+      "label": "Hover text color",
+      "default": "#6B1F24"
+    },
+    {
+      "type": "checkbox",
+      "id": "force_single_row",
+      "label": "Force single row layout",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Icons"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon size",
+      "min": 16,
+      "max": 36,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header customization"
+    }
+  ]
+}
 {% endschema %}
